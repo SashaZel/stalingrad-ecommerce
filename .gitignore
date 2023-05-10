@@ -1,0 +1,49 @@
+# dependencies
+/stalingrad-ecomm/node_modules
+/stalingrad-ecomm/.pnp
+/stalingrad-ecomm/.pnp.js
+
+# testing
+/stalingrad-ecomm/coverage
+
+# next.js
+/stalingrad-ecomm/.next/
+/stalingrad-ecomm/out/
+
+# production
+/stalingrad-ecomm/build
+
+# misc
+/stalingrad-ecomm/.DS_Store
+/stalingrad-ecomm/*.pem
+
+# debug
+/stalingrad-ecomm/npm-debug.log*
+/stalingrad-ecomm/yarn-debug.log*
+/stalingrad-ecomm/yarn-error.log*
+/stalingrad-ecomm/.pnpm-debug.log*
+
+# local env files
+.env
+/stalingrad-ecomm/.env
+/stalingrad-ecomm/.env*.local
+
+# vercel
+/stalingrad-ecomm/.vercel
+
+# typescript
+/stalingrad-ecomm/*.tsbuildinfo
+/stalingrad-ecomm/next-env.d.ts
+
+# data-parcer
+/data-parcer/foto-test/*
+/data-parcer/output-json/*
+/data-parcer/node_modules
+
+# lambda-api
+/lambda-api/public/*
+
+# xlsx-reader-writer
+/xlsx-reader-writer/node_modules
+/xlsx-reader-writer/test-data/Stalingrad-data.xlsx
+
