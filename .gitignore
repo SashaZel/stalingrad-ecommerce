@@ -47,3 +47,6 @@
 /xlsx-reader-writer/node_modules
 /xlsx-reader-writer/test-data/Stalingrad-data.xlsx
 
+# ydb
+/ydb/node_modules
+

@@ -3,7 +3,7 @@ import { ddbClient } from "../../../lib/YDB-utils";
 import { ListTablesCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
-const getListTables = async () => {
+export const getListTables = async () => {
   try {
     const data = await ddbClient.send(new ListTablesCommand({}));
     console.log(data);

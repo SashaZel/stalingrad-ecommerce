@@ -1,3 +1,5 @@
+import { getListTables } from '../stalingrad-ecomm/src/pages/api/myDBquery.ts';
+
 export function codeToNumber(codeRaw) {
   const code = codeRaw.toLowerCase();
   if (code.length === 1) {
@@ -19,6 +21,9 @@ export function numberToCode(numberRaw) {
   }
   throw new Error('@numberToCode() number out of range ');
 }
+
+const allTables = await getListTables();
+console.log(allTables);
 
 // console.log(codeToNumber("AZ"));
 // console.log(numberToCode(5));

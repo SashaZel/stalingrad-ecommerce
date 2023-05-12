@@ -8,16 +8,16 @@ export const ddbClient = new DynamoDBClient({
     endpoint: DOCUMENT_API_ENDPOINT
 });
 
-interface I_ITEMS_TABLE {
-   ItemID: string;
-   Maker: string;
-   NameENG: string;
-   NameRUS: string;
-   DescriptionRUS: string;
-   DescriptionENG: string;
-   Rating: 1 | 2 | 3 | 4 | 5;
-   Date: string;
-   PriceRUB: number;
-   PriceUSD: number;
-   Keywords: string[];
-}
+// interface I_ITEMS_TABLE {
+//    ItemID: string;
+//    Maker: string;
+//    NameENG: string;
+//    NameRUS: string;
+//    DescriptionRUS: string;
+//    DescriptionENG: string;
+//    Rating: 1 | 2 | 3 | 4 | 5;
+//    Date: string;
+//    PriceRUB: number;
+//    PriceUSD: number;
+//    Keywords: string[];
+// }
