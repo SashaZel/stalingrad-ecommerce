@@ -1,0 +1,6 @@
+{
+  "redirectAllRequests": {
+    "protocol": "PROTOCOL_HTTP",
+    "hostname": "stalingrad-diorama.ru"
+  }
+}

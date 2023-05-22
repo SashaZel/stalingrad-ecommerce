@@ -1,12 +1,14 @@
 import xlsx from "xlsx";
-import { codeToNumber, numberToCode } from "./utils.js";
+import { codeToNumber, numberToCode } from "./common-utils.js";
+import { putItem } from "./ydb-utils.js";
 
-export const readExcelFile = async (filePath) => {
+
+export const readExcelFile = async (filePath, fileName) => {
   try {
-    const path = "./test-data";
-    const file = xlsx.readFile(`${path}/${filePath}`);
-    let data = [];
-    const sheets = file.SheetNames;
+    // const path = "./test-data";
+    const file = xlsx.readFile(`${filePath}\\${fileName}`);
+    // let data = [];
+    // const sheets = file.SheetNames;
     //console.log(file.Sheets.Sheet1);
     // for (let i = 0; i < sheets.length; i++) {
     //   const temp = xlsx.utils.sheet_to_json(file.Sheets[file.SheetNames[i]]);
@@ -17,20 +19,20 @@ export const readExcelFile = async (filePath) => {
     // console.log(data);
     return file;
   } catch (err) {
-    console.log(err);
+    console.log('@readExcelFile ', err);
   }
 };
 
-const testExcel = await readExcelFile("test-excel.xlsx");
-//console.log(testExcel.Sheets.Sheet1);
+// const testExcel = await readExcelFile("test-excel.xlsx");
+// //console.log(testExcel.Sheets.Sheet1);
 
-const stalingradData = await readExcelFile("Stalingrad-data.xlsx");
-console.log(
-  `The stalingradData.Warehouse has size ${stalingradData.Sheets.Warehouse["!ref"]}`
-);
-console.log(
-  `For item# ${stalingradData.Sheets.Warehouse.GN4.v} now available ${stalingradData.Sheets.Warehouse.GN6.v} sets`
-);
+
+// console.log(
+//   `The stalingradData.Warehouse has size ${stalingradData.Sheets.Warehouse["!ref"]}`
+// );
+// console.log(
+//   `For item# ${stalingradData.Sheets.Warehouse.GN4.v} now available ${stalingradData.Sheets.Warehouse.GN6.v} sets`
+// );
 
 export function getStock(warehouseData) {
   const maxColumn = warehouseData.Sheets.Warehouse["!ref"]
@@ -43,7 +45,7 @@ export function getStock(warehouseData) {
   const stock = [];
   for(let i=0; i<maxColumnNumber; i++) {
     const columnNumber = numberToCode(i);
-    console.log(columnNumber);
+    //console.log(columnNumber);
     if(typeof warehouseData.Sheets.Warehouse[`${columnNumber}4`]?.v === 'number' && typeof warehouseData.Sheets.Warehouse[`${columnNumber}6`]?.v === 'number' ) {
       stock.push({
         id: warehouseData.Sheets.Warehouse[`${columnNumber}4`].v,
@@ -51,6 +53,18 @@ export function getStock(warehouseData) {
       });
     }
   }
-  console.log(stock);
+  // console.log(stock);
+  return stock;
 }
-getStock(stalingradData);
+
+export async function updateDB(stockList, brand) {
+  for (let i=0; i<stockList.length; i++) {
+    const params = {
+      table: 'ITEMS',
+      brand: brand,
+      ID: stockList[i].id,
+      stock: stockList[i].stock
+    }
+    await putItem(params)
+  }
+}

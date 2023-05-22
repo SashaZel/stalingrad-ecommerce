@@ -1,4 +1,4 @@
-import { getListTables } from '../stalingrad-ecomm/src/pages/api/myDBquery.ts';
+import { readFile } from 'node:fs/promises'
 
 export function codeToNumber(codeRaw) {
   const code = codeRaw.toLowerCase();
@@ -22,8 +22,6 @@ export function numberToCode(numberRaw) {
   throw new Error('@numberToCode() number out of range ');
 }
 
-const allTables = await getListTables();
-console.log(allTables);
+export async function adjustBigSetsStock() {
 
-// console.log(codeToNumber("AZ"));
-// console.log(numberToCode(5));
+} 

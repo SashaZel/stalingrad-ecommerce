@@ -1,4 +1,3 @@
-import * as dotenv from "dotenv";
 import {
   DynamoDBClient,
   CreateTableCommand,
@@ -6,12 +5,10 @@ import {
   DescribeTableCommand,
   PutItemCommand,
   GetItemCommand,
+  BatchGetItemCommand,
 } from "@aws-sdk/client-dynamodb";
+import { REGION, DOCUMENT_API_ENDPOINT } from "./constants.js";
 
-dotenv.config({ path: "../stalingrad-ecomm/.env" });
-
-const REGION = "ru-central-1";
-const DOCUMENT_API_ENDPOINT = process.env.DOCUMENT_API_ENDPOINT;
 
 export const ddbClient = new DynamoDBClient({
   region: REGION,
@@ -113,6 +110,35 @@ export const getItem = async ({ table, brand, itemID }) => {
     data = await ddbClient.send(new GetItemCommand(params));
   } catch (error) {
     console.error("Error @getItem ", error);
+  }
+  return data;
+};
+
+export const getBatchItems = async ({ table, listItems }) => {
+
+  const requestKeys = [];
+  listItems.map(item => {
+    const [brand, id] = item.split('-');
+    const requestElement = {
+      Brand: { S: brand },
+      ID: { N: id },
+    };
+    requestKeys.push(requestElement);
+  });
+  const params = {
+    RequestItems: {
+      [table]: {
+        //AttributesToGet: ['Brand', 'ID', 'Stock'],
+        Keys: requestKeys,
+      },
+    },
+  };
+
+  let data;
+  try {
+    data = await ddbClient.send(new BatchGetItemCommand(params));
+  } catch (error) {
+    console.error("Error @getBatchItems ", error);
   }
   return data;
 };

@@ -39,6 +39,7 @@
 /data-parcer/foto-test/*
 /data-parcer/output-json/*
 /data-parcer/node_modules
+/test
 
 # lambda-api
 /lambda-api/public/*
@@ -49,4 +50,10 @@
 
 # ydb
 /ydb/node_modules
+
+# AWS config
+aws-config.sh
+
+# product data and pictures
+/public
 

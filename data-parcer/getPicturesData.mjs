@@ -1,6 +1,8 @@
 import imageSize from "image-size";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 
+//TODO: make validation. Prod data process do not work!
+
 const ITEM_DRAFT = {
   id: "",
   catName: "Soviet infantryman",
@@ -15,18 +17,31 @@ const ITEM_DRAFT = {
   relatedLinks: [],
   releaseDate: "",
   prices: {
-    priceWholesaleUSD: 10,
-    priceWholesaleEUR: 9,
-    priceWholesaleRUB: 561,
-    priceRetailUSD: 17,
-    priceRetailEUR: 14,
-    priceRetailRUB: 710,
+    priceWholesaleUSD: 0,
+    priceWholesaleEUR: 0,
+    priceWholesaleRUB: 0,
+    priceRetailUSD: 0,
+    priceRetailEUR: 0,
+    priceRetailRUB: 0,
+  },
+  bigSetData: {
+    isBigSet: false,
+    includesSets: [],
+    partOfSets: [],
   },
   rating: 0,
 };
 
 function getPictureSize(folderPictures, file) {
-  return imageSize(folderPictures + file);
+  let result;
+  try {
+    result = imageSize(`${folderPictures}\\${file}`);
+  } catch (error) {
+    console.error(
+      `@getPictureSize error in imageSize at ${folderPictures} file ${file} Error: ${error}`
+    );
+  }
+  return result;
 }
 
 async function getFileNames(folder) {
@@ -46,7 +61,7 @@ async function getAlreadyExistData(folderOutput) {
   try {
     for (const file of folderOutputFiles) {
       try {
-        const contents = await readFile(`${folderOutput}${file}`, {
+        const contents = await readFile(`${folderOutput}\\${file}`, {
           encoding: "utf8",
         });
         const itemData = JSON.parse(contents);
@@ -71,18 +86,26 @@ async function getAlreadyExistData(folderOutput) {
 function sortPictures(currentItem) {
   const fullSizeImages = [];
   const previewImages = [];
-  currentItem.picturesRaw.map((picture) => {
-    const nameSuffics = picture.pictureName.split("-")[1];
-    if (
-      nameSuffics[0] === "0" ||
-      nameSuffics.slice(0, 2) === "s0" ||
-      nameSuffics.slice(0, 2) === "p0"
-    ) {
-      previewImages.push(picture);
-    } else {
-      fullSizeImages.push(picture);
-    }
-  });
+  currentItem.picturesRaw
+    .filter((picture) => {
+      const validPictureName = picture.pictureName.includes("-");
+      if (!validPictureName) {
+        console.error(`@sortPicture wrong picture name ${picture.pictureName}`);
+      }
+      return validPictureName;
+    })
+    .map((picture) => {
+      const nameSuffics = picture.pictureName.split("-")[1];
+      if (
+        nameSuffics[0] === "0" ||
+        nameSuffics.slice(0, 2) === "s0" ||
+        nameSuffics.slice(0, 2) === "p0"
+      ) {
+        previewImages.push(picture);
+      } else {
+        fullSizeImages.push(picture);
+      }
+    });
   fullSizeImages.map((pictureFullSize) => {
     const fullSuffics = pictureFullSize.pictureName.split("-")[1];
     let coverPicture = false;
@@ -135,18 +158,34 @@ function sortPictures(currentItem) {
   return currentItem;
 }
 
+function picturesNamesValidator(file) {
+  const fileExtension = file.split(".")[1];
+  const validFileExtension =
+    fileExtension === "jpg" || fileExtension === "jpeg";
+  if (!validFileExtension) {
+    console.error(`@picturesNamesValidator() Error at ${file} file: wrong extension`);
+    return false;
+  }
+  const fileHasDash = file.includes('-');
+  if(!fileHasDash) {
+    console.error(`@picturesNamesValidator() file name of ${file} has not "-" dash`);
+    return false;
+  }
+  return true;
+}
+
 export async function getPicturesData(folderPictures, folderOutput, brand) {
   if (!folderPictures || !folderOutput || !brand) {
     console.error("Error @getPicturesData(): missed args");
     return;
   }
-  const files = await getFileNames(folderPictures);
+  const unfilteredFiles = await getFileNames(folderPictures);
+  const files = unfilteredFiles.filter(picturesNamesValidator);
   const dataReady = await getAlreadyExistData(folderOutput);
 
   if (!files || !dataReady) return;
 
   files.forEach((file) => {
-
     const idDraft = `${brand}-${file.split("-")[0]}`;
 
     if (!dataReady[idDraft]) {
@@ -155,26 +194,31 @@ export async function getPicturesData(folderPictures, folderOutput, brand) {
     }
 
     const imageSize = getPictureSize(folderPictures, file);
+    if (!imageSize) {
+      return null;
+    }
     const pictureDraft = {
       pictureName: file,
       width: imageSize.width,
       height: imageSize.height,
     };
     dataReady[idDraft].picturesRaw.push(pictureDraft);
-    
   });
 
   for (const item in dataReady) {
     const currentItem = dataReady[item];
     const currentItemSortedPictures = sortPictures(currentItem);
-    const currentItemJSON = JSON.stringify(currentItemSortedPictures);
-    const JSONname = `${folderOutput}${currentItemSortedPictures.id}.json`;
+    const currentItemJSON = JSON.stringify(currentItemSortedPictures, null, 2);
+    const JSONname = `${folderOutput}\\${currentItemSortedPictures.id}.json`;
     try {
       await writeFile(JSONname, currentItemJSON);
       console.log("file ", JSONname, " wrote success");
-
-    } catch(error) {
-      console.error('Error @getPicturesData() @writeFile file name: ', JSONname, error);
+    } catch (error) {
+      console.error(
+        "Error @getPicturesData() @writeFile file name: ",
+        JSONname,
+        error
+      );
     }
   }
 }
