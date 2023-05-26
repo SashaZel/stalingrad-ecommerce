@@ -29,3 +29,5 @@ You have to put all data in 'Stalingrad-3042.json' (e.g. prices, description and
 
 You can safely run this parser a lot of times - all text data will be safe but pictures data will kept actual state of picture source folder.
 These JSON files is useful for SSG Next.js app and total price calculation.
+
+### SSG with Next.js

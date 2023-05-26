@@ -1,5 +1,8 @@
 #/bin/bash
 
+# abort on errors
+set -e
+
 function choose_from_menu() {
     local prompt="$1" outvar="$2"
     shift
@@ -39,8 +42,8 @@ function choose_from_menu() {
 selections=(
 "Quit"
 "Deploy Lambda API #1"
-"Deploy and sync static S3"
-"Selection C"
+"Build and deploy frontend (without pic)"
+"Deploy and sync pictures"
 )
 
 
@@ -70,13 +73,28 @@ while [ "$selected_choice" != "Quit" ]; do
                 ./deploy.sh
                 cd ..
                 ;;
-            "Deploy and sync static S3")
-                cd static-hosting
-                ./deploy.sh
+            "Build and deploy frontend (without pic)")
+                cd stalingrad-ecomm
+                #clear already exist build dir
+                if [ -d "./out/" ]; then
+                    rm -rf out
+                fi
+                npm run build
+                cd ../static-hosting
+                ./deploy-frontend.sh
+                echo "frontend app has deployed (without frontend pictures)"
+                cd ../stalingrad-ecomm
+                if [ -d "./out/" ]; then
+                    rm -rf out
+                fi
+                echo "out directory is removed"
                 cd ..
                 ;;
-            "Selection C")
-                echo "you chose choice $selected_choice which is $selected_choice"
+            "Deploy and sync pictures")
+                cd static-hosting
+                ./deploy-pictures.sh
+                echo "pictures for frontend app have deployed"
+                cd ..
                 ;;
             "Quit")
                 exit

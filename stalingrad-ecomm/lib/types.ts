@@ -41,6 +41,15 @@ export interface IItemLocalJSON {
   rating: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
+export interface IItemDataLimited {
+  id: string;
+  catName: string;
+  catNameRUS: string;
+  prices: {
+    priceRetailRUB: number;
+  }
+}
+
 export const ITEM_DATA_LOCAL_EXAMPLE: IItemLocalJSON = {
   "id": "Stalingrad-3202",
   "catName": "Soviet infantryman",

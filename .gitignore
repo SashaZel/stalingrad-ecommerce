@@ -56,4 +56,9 @@ aws-config.sh
 
 # product data and pictures
 /public
+/stalingrad-ecomm/public
+
+# test let's encrypted sertificates
+
+/static-hosting/public/.well-known
 

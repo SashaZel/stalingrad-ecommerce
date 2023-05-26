@@ -1,11 +1,16 @@
-import { GetStaticPaths, GetStaticProps } from "next";
+import { useAtom } from "jotai";
 import {
   IStaticPathData,
   getStaticDataFromLocal,
   getStaticPathsFromLocalData,
-} from "../../../lib/local-items-data";
-import { IItemLocalJSON } from "../../../lib/types";
-
+} from "../../../../lib/local-items-data";
+import { IItemLocalJSON } from "../../../../lib/types";
+import Layout from "../../../../components/layout";
+import Head from "next/head";
+import Link from "next/link";
+import { cartAtom, countAtom } from "../../../../lib/store";
+import { ISingleStock, useSingleStock } from "../../../../api/useSingleStock";
+import { SingleStock } from "../../../../components/SingleStock";
 
 export async function getStaticPaths() {
   const paths = await getStaticPathsFromLocalData();
@@ -17,19 +22,56 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(pathData: IStaticPathData) {
+  const currentEnv = process.env.CURRENT_ENV;
+  //console.log("Current env", currentEnv);
+
   const itemData = await getStaticDataFromLocal(pathData.params.item);
   return {
     props: {
-      itemData
-    }
-  }
+      itemData,
+      currentEnv,
+    },
+  };
 }
 
-export default function Item({ itemData }: { itemData: IItemLocalJSON}) {
-  // console.log( 'Item DAta', itemData)
-  return <>
-  {`The ${itemData.id} ${itemData.catName} price is ${itemData.prices.priceRetailRUB} RUB`}</>
+export default function Item({
+  itemData,
+  currentEnv,
+}: {
+  itemData: IItemLocalJSON;
+  currentEnv: "dev" | "prod";
+}) {
+  const [count, setCount] = useAtom(countAtom);
 
+  // console.log( 'Item DAta', itemData)
+  return (
+    <Layout>
+      <Head>
+        <title>{itemData.id}</title>
+      </Head>
+      <div>
+        <img
+          src={`/pictures/Stalingrad/${itemData.id.split("-")[1]}-0.jpg`}
+          alt="item in Stalingrad catalogue"
+        />
+        <p>
+          {`The ${itemData.id} ${itemData.catName} price is ${itemData.prices.priceRetailRUB} RUB`}
+        </p>
+
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}. Increment it!
+        </button>
+
+        <Link href="/items/">All items</Link>
+        <SingleStock
+          itemID={itemData.id}
+          catName={itemData.catName}
+          currentEnv={currentEnv}
+          priceRUB={itemData.prices.priceRetailRUB}
+        />
+      </div>
+    </Layout>
+  );
 }
 
 // export default function Item({ itemData }) {
