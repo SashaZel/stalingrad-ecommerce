@@ -82,12 +82,19 @@ export default function AllItemsPage({ currentItemsData, currentPage, totalPages
     <Layout>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="description" content="Каталог фигурок Stalingrad масштаб 1/35"></meta>
       </Head>
-      <div>
+      <section className="container">
+        <h1>Hello dear friends</h1>
+        <h2>h2 Hello dear friend</h2>
+        <h3>h3Hekko dfdfasd dfasdf</h3>
+        <h4>h4Hoole adde eekfje </h4>
+        <h5>h5</h5>
+        <p>this is p</p>
         Hi, these items sort by date
         <ul>{catPreview}</ul>
         <PaginationNav  currentPage={currentPage} totalPages={totalPages} linkPredicate="/items/all-by-date/" />
-      </div>
+      </section>
     </Layout>
   );
 }

@@ -57,8 +57,12 @@ aws-config.sh
 # product data and pictures
 /public
 /stalingrad-ecomm/public
+/backup
 
 # test let's encrypted sertificates
 
 /static-hosting/public/.well-known
 
+# temp files (images)
+
+/tmp

@@ -82,11 +82,11 @@ export default function AllItemsPage({ currentItemsData, currentPage, totalPages
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div>
+      <section className="container">
         Hi cat page
         <ul>{catPreview}</ul>
         <PaginationNav  currentPage={currentPage} totalPages={totalPages} linkPredicate="/items/all/" />
-      </div>
+      </section>
     </Layout>
   );
 }

@@ -36,3 +36,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+Package                   Current   Wanted   Latest  Location                               Depended by     
+@aws-sdk/client-dynamodb  3.297.0  3.297.0  3.345.0  node_modules/@aws-sdk/client-dynamodb  stalingrad-ecomm
+@aws-sdk/util-dynamodb    3.297.0  3.297.0  3.345.0  node_modules/@aws-sdk/util-dynamodb    stalingrad-ecomm
+@types/node               18.15.5  18.15.5   20.2.5  node_modules/@types/node               stalingrad-ecomm
+@types/react              18.0.28  18.0.28   18.2.8  node_modules/@types/react              stalingrad-ecomm
+@types/react-dom          18.0.11  18.0.11   18.2.4  node_modules/@types/react-dom          stalingrad-ecomm
+eslint                     8.36.0   8.36.0   8.42.0  node_modules/eslint                    stalingrad-ecomm
+eslint-config-next         13.2.4   13.2.4   13.4.4  node_modules/eslint-config-next        stalingrad-ecomm
+next                       13.2.4   13.2.4   13.4.4  node_modules/next                      stalingrad-ecomm
+typescript                  5.0.2    5.0.2    5.1.3  node_modules/typescript                stalingrad-ecomm

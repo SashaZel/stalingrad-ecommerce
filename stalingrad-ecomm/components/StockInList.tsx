@@ -5,7 +5,7 @@ interface IStockInListProps {
     stock: string;
   }[];
   isLoading: boolean | undefined;
-  isError: boolean | undefined;
+  isError: string | undefined;
   currentID: string;
 }
 

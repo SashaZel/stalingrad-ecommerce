@@ -41,7 +41,8 @@ function choose_from_menu() {
 
 selections=(
 "Quit"
-"Deploy Lambda API #1"
+"Deploy Lambda API #1 (GET stock)"
+"Deploy Lambda API #2 (POST order)"
 "Build and deploy frontend (without pic)"
 "Deploy and sync pictures"
 )
@@ -68,8 +69,13 @@ while [ "$selected_choice" != "Quit" ]; do
 
         echo "...start $selected_choice"
         case $selected_choice in
-            "Deploy Lambda API #1")
+            "Deploy Lambda API #1 (GET stock)")
                 cd lambda-api
+                ./deploy.sh
+                cd ..
+                ;;
+            "Deploy Lambda API #2 (POST order)")
+                cd lambda-api-orders
                 ./deploy.sh
                 cd ..
                 ;;

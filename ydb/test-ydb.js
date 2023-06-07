@@ -4,13 +4,14 @@ import {
   describeTable,
   putItem,
   getItem,
-  getBatchItems
+  getBatchItems,
+  decrementStockByNumber
 } from "./ydb-utils.js";
 
 // await createItemsTable();
 
-const tableDescription = await describeTable('ITEMS');
-console.log(tableDescription);
+// const tableDescription = await describeTable('ITEMS');
+// console.log(tableDescription);
 
 // const allTables = await getListTables();
 // console.log(allTables.TableNames);
@@ -46,3 +47,6 @@ console.log(tableDescription);
 // //   { Brand: { S: 'Stalingrad' }, ID: { N: '3221' }, Stock: { N: '12' } },
 // //   { Brand: { S: 'Stalingrad' }, ID: { N: '3222' }, Stock: { N: '12' } }
 // // ]
+
+const resultDecrement = await decrementStockByNumber("Stalingrad", "1105", 2);
+console.log(resultDecrement);

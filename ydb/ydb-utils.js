@@ -4,11 +4,12 @@ import {
   ListTablesCommand,
   DescribeTableCommand,
   PutItemCommand,
+  UpdateItemCommand,
   GetItemCommand,
   BatchGetItemCommand,
 } from "@aws-sdk/client-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
 import { REGION, DOCUMENT_API_ENDPOINT } from "./constants.js";
-
 
 export const ddbClient = new DynamoDBClient({
   region: REGION,
@@ -47,6 +48,44 @@ export const createItemsTable = async () => {
   try {
     const data = await ddbClient.send(new CreateTableCommand(params));
     console.log("ITEMS Table Created", data);
+    return data;
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
+
+export const createOrdersTable = async () => {
+  const params = {
+    AttributeDefinitions: [
+      {
+        AttributeName: "email", //ATTRIBUTE_NAME_1
+        AttributeType: "S", //ATTRIBUTE_TYPE
+      },
+      {
+        AttributeName: "date", //ATTRIBUTE_NAME_2
+        AttributeType: "N", //ATTRIBUTE_TYPE
+      },
+    ],
+    KeySchema: [
+      {
+        AttributeName: "email", //ATTRIBUTE_NAME_1
+        KeyType: "HASH",
+      },
+      {
+        AttributeName: "date", //ATTRIBUTE_NAME_2
+        KeyType: "RANGE",
+      },
+    ],
+    ProvisionedThroughput: {
+      ReadCapacityUnits: 1,
+      WriteCapacityUnits: 1,
+    },
+    TableName: "ORDERS", //TABLE_NAME
+  };
+
+  try {
+    const data = await ddbClient.send(new CreateTableCommand(params));
+    console.log("ORDERS Table Created", data);
     return data;
   } catch (err) {
     console.log("Error", err);
@@ -96,6 +135,28 @@ export const putItem = async ({ table, brand, ID, stock }) => {
   return data;
 };
 
+export const decrementStockByNumber = async (brand, ID, num) => {
+  const params = {
+    TableName: "ITEMS",
+    Key: marshall({
+      Brand: brand,
+      ID: Number(ID),
+    }),
+    UpdateExpression: "SET Stock = Stock - :decr",
+    ExpressionAttributeValues: marshall({
+      ":decr": num,
+    }),
+    ReturnValues: "UPDATED_NEW",
+  };
+  let data;
+  try {
+    data = await ddbClient.send(new UpdateItemCommand(params));
+  } catch (error) {
+    console.error("@decrementStockByNumber() Error ", error);
+  }
+  return data;
+};
+
 export const getItem = async ({ table, brand, itemID }) => {
   const params = {
     TableName: table, //TABLE_NAME
@@ -115,10 +176,9 @@ export const getItem = async ({ table, brand, itemID }) => {
 };
 
 export const getBatchItems = async ({ table, listItems }) => {
-
   const requestKeys = [];
-  listItems.map(item => {
-    const [brand, id] = item.split('-');
+  listItems.map((item) => {
+    const [brand, id] = item.split("-");
     const requestElement = {
       Brand: { S: brand },
       ID: { N: id },

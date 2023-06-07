@@ -8,7 +8,7 @@ export interface IBatchStock {
     stock: string;
   }[];
   isLoading: boolean;
-  isError: boolean;
+  isError: string | undefined;
 }
 
 const STOCK_FUNCTION_YC = "https://functions.yandexcloud.net/d4e43fcbjv11pq6m2qh8";
@@ -35,7 +35,7 @@ export function useBatchStock(idList: string[], currentEnv: "dev" | "prod"): IBa
   if (!data && !isLoading) {
     const DUMMY_BATCH_STOCK: IBatchStock = {
       isLoading: false,
-      isError: false,
+      isError: '',
       data: idList.map((id) => {
         return {
           brand: id.split("-")[0],

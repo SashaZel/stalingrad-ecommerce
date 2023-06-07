@@ -1,9 +1,5 @@
 import { useAtom } from "jotai";
-import {
-  IStaticPathData,
-  getStaticDataFromLocal,
-  getStaticPathsFromLocalData,
-} from "../../../../lib/local-items-data";
+import { IStaticPathData, getStaticDataFromLocal, getStaticPathsFromLocalData } from "../../../../lib/local-items-data";
 import { IItemLocalJSON } from "../../../../lib/types";
 import Layout from "../../../../components/layout";
 import Head from "next/head";
@@ -34,13 +30,7 @@ export async function getStaticProps(pathData: IStaticPathData) {
   };
 }
 
-export default function Item({
-  itemData,
-  currentEnv,
-}: {
-  itemData: IItemLocalJSON;
-  currentEnv: "dev" | "prod";
-}) {
+export default function Item({ itemData, currentEnv }: { itemData: IItemLocalJSON; currentEnv: "dev" | "prod" }) {
   const [count, setCount] = useAtom(countAtom);
 
   // console.log( 'Item DAta', itemData)
@@ -48,19 +38,15 @@ export default function Item({
     <Layout>
       <Head>
         <title>{itemData.id}</title>
+        <meta property="og:title" content={`Stalingrad ${itemData.id}`} />
+        <meta property="og:description" content={`"${itemData.catNameRUS || itemData.catName}"`} />
+        <meta property="og:url" content= {`https://stalingrad-diorama.ru/items/${itemData.id}/`} />
       </Head>
-      <div>
-        <img
-          src={`/pictures/Stalingrad/${itemData.id.split("-")[1]}-0.jpg`}
-          alt="item in Stalingrad catalogue"
-        />
-        <p>
-          {`The ${itemData.id} ${itemData.catName} price is ${itemData.prices.priceRetailRUB} RUB`}
-        </p>
+      <section className="container">
+        <img src={`/pictures/Stalingrad/${itemData.id.split("-")[1]}-0.jpg`} alt="item in Stalingrad catalogue" />
+        <p>{`The ${itemData.id} ${itemData.catName} price is ${itemData.prices.priceRetailRUB} RUB`}</p>
 
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}. Increment it!
-        </button>
+        <button onClick={() => setCount((count) => count + 1)}>count is {count}. Increment it!</button>
 
         <Link href="/items/">All items</Link>
         <SingleStock
@@ -69,7 +55,7 @@ export default function Item({
           currentEnv={currentEnv}
           priceRUB={itemData.prices.priceRetailRUB}
         />
-      </div>
+      </section>
     </Layout>
   );
 }

@@ -10,7 +10,7 @@ interface IItemRowProps {
     stock: string;
   }[];
   isLoading: boolean | undefined;
-  isError: boolean | undefined;
+  isError: string | undefined;
 }
 
 export function ItemRow({ item, data, isLoading, isError }: IItemRowProps) {
@@ -20,5 +20,6 @@ export function ItemRow({ item, data, isLoading, isError }: IItemRowProps) {
     <img src={`/pictures/Stalingrad/${catNumber}-0.jpg`} alt="" />
     <Link href={`/items/${item.id}/`}>{`${item.id} ${catName}`}</Link>
     <StockInList data={data} isLoading={isLoading} isError={isError} currentID={item.id} />
+    <span> {item.prices.priceRetailRUB} RUB</span>
   </li>;
 }
