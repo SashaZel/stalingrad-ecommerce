@@ -1,0 +1,152 @@
+.heroContainer {
+  width: 100%;
+  margin-top: -10rem;
+  height: 65rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.heroLeft {
+  margin-top: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 24px 10px;
+  position: absolute;
+  text-align: center;
+  align-self: center;
+  background-color: var(--bg-second-semi);
+}
+
+.heroPreHeader {
+  margin-bottom: 0.5rem;
+  color: var(--text-gray-third);
+  text-shadow: 0 0 10px black;
+}
+
+.heroHeaderRed {
+  color: var(--text-red-first);
+}
+
+.heroPostHeader {
+  margin-top: 36px;
+  color: var(--text-gray-second);
+}
+
+.heroButtonsContainer {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heroButton {
+  margin-top: 16px;
+  margin-right: 8px;
+  padding: 8px 16px;
+  min-width: 12rem;
+  max-width: 15rem;
+  white-space: nowrap;
+  display: block;
+  border: 1px solid var(--main-06);
+  transition: all 0.3s;
+}
+
+.heroButtonDark {
+  background-color: var(--main-06);
+}
+
+.heroButtonDark:hover {
+  background-color: transparent;
+}
+
+.heroButtonLight:hover {
+  background-color: var(--main-06);
+}
+
+.heroImage {
+  width: 1200px;
+  height: 750px;
+}
+
+/* ========== media ================================ */
+
+@media screen and (min-width: 640px) {
+
+  .heroContainer {
+    margin-top: -5rem;
+    height: 60rem;
+  }
+  
+}
+
+@media screen and (min-width: 768px) {
+
+  .heroContainer {
+    margin-top: -2rem;
+    height: 60rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .heroLeft {
+    padding: 36px;
+    align-self: flex-end;
+  }
+
+  .heroButtonsContainer {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+  .heroContainer {
+    height: 50rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .heroLeft {
+    margin-top: 20rem;
+    padding: 36px;
+    align-self: flex-end;
+  }
+
+}
+
+@media screen and (min-width: 1280px) {
+
+  .heroContainer {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    flex-direction: row;
+  }
+
+  .heroLeft {
+    margin-top: 0;
+    padding: 0;
+    text-align: left;
+    position: static;
+    margin-left: calc((100vw - 1160px) / 2);
+    min-width: fit-content;
+    align-self: center;
+    background-color: transparent;
+  }
+
+  .heroButtonsContainer {
+    justify-content: left;
+  }
+
+  .heroRight {
+    padding-left: 16px;
+  }
+
+  
+ }

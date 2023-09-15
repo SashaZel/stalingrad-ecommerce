@@ -1,5 +1,7 @@
 # Serverless ecommerce app.
 
+[Live demo](https://stalingrad-diorama.ru/) (under construction)
+
 JAM-stack app retrieves data from local machine .xlsx .json and .jpg files.
 
 Uses Yandex YDB data base (analogue of AWS DynamoDB) for orders and stock storage. 

@@ -14,14 +14,33 @@ export default function Home() {
         <meta property="og:description" content="Фигурки из смолы 1/35" />
         <meta property="og:url" content="https://stalingrad-diorama.ru/" />
       </Head>
-      <section className={`container `}>
-        <p>ИНТЕРНЕТ-МАГАЗИН ФИГУРОК 1:35</p>
-        <h1>
-          ОДНИ ИЗ ЛУЧШИХ СМОЛЯНЫХ ФИГУРОК <br />
-          <span> СДЕЛАНО В РОССИИ</span>
-        </h1>{" "}
-        <p>Stalingrad - всегда качественные, всегда оригинальные фигурки для ваших диорам.</p>{" "}
-        <Link href="/">Смотреть каталог</Link> <Link href="/">Узнать больше</Link>
+      <section className={`container ${styles.heroContainer}`}>
+        <div className={styles.heroLeft}>
+          <p className={styles.heroPreHeader}>ИНТЕРНЕТ-МАГАЗИН ФИГУРОК 1:35</p>
+          <h1>
+            ОДНИ ИЗ ЛУЧШИХ
+            <br /> СМОЛЯНЫХ ФИГУРОК <br />
+            <span className={styles.heroHeaderRed}> СДЕЛАНО В РОССИИ</span>
+          </h1>{" "}
+          <p className={styles.heroPostHeader}>
+            Stalingrad - всегда качественные,
+            <br /> всегда оригинальные фигурки для ваших диорам.
+          </p>{" "}
+          <div className={styles.heroButtonsContainer}>
+            <Link className={`${styles.heroButton} ${styles.heroButtonDark}`} href="/">
+              Смотреть каталог
+            </Link>
+            <Link className={`${styles.heroButton} ${styles.heroButtonLight}`} href="/">
+              Узнать больше
+            </Link>
+          </div>
+        </div>
+        <div className={styles.heroRight}>
+          <picture>
+            <source srcSet="/img/hero-image-01.webp" type="image/webp" />
+            <img className={styles.heroImage} src="/img/hero-image-01.png" alt="hero poster" />
+          </picture>
+        </div>
       </section>
       <section className={`container `}>
         <div>
@@ -96,17 +115,17 @@ export default function Home() {
         <h2>Stalingrad-shop - интернет-магазин оригинальных смоляных фигурок из России.</h2>
         <p>В ассортименте магазина представлено более 300 наборов фигурок Stalingrad.</p>
         <div>
-        <Link href="/">Красная армия</Link>
-        <Link href="/">Немцы</Link>
-        <Link href="/">Гражданские</Link>
-        <Link href="/">Современка</Link>
-        <Link href="/">Первая мировая</Link>
-        <Link href="/">Фантастика</Link>
-        <Link href="/">Масштаб 1:35</Link>
-        <Link href="/">Масштаб 1:16</Link>
-        <Link href="/">Масштаб 1:48</Link>
-        <Link href="/items/all/1/">Все фигурки по номерам</Link>
-        <Link href="/items/all-by-date/1/">Все фигурки по дате релиза</Link>
+          <Link href="/">Красная армия</Link>
+          <Link href="/">Немцы</Link>
+          <Link href="/">Гражданские</Link>
+          <Link href="/">Современка</Link>
+          <Link href="/">Первая мировая</Link>
+          <Link href="/">Фантастика</Link>
+          <Link href="/">Масштаб 1:35</Link>
+          <Link href="/">Масштаб 1:16</Link>
+          <Link href="/">Масштаб 1:48</Link>
+          <Link href="/items/all/1/">Все фигурки по номерам</Link>
+          <Link href="/items/all-by-date/1/">Все фигурки по дате релиза</Link>
         </div>
       </section>
       <section className="container">

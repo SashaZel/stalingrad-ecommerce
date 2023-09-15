@@ -8,6 +8,8 @@
 
   --bg-first: #0d0d0d;
   --bg-first-semi: #0d0d0df6;
+  --bg-second: #171616;
+  --bg-second-semi: #171616c3;
   --text-gray-first: #d8d1c8;
   --text-gray-second: #877f76;
   --text-gray-third: #544e46;
@@ -80,9 +82,9 @@ body {
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 2rem;
   font-weight: bold;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   line-height: 1;
 }
 
@@ -159,6 +161,13 @@ a:focus {
 
 @media screen and (min-width: 640px) {
 
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+
   .container {
     margin: 10px auto;
     padding: 0 20px;
@@ -183,6 +192,12 @@ a:focus {
 }
 
 @media screen and (min-width: 1280px) {
+
+  h1 {
+    font-size: 2.7rem;
+    font-weight: bold;
+    line-height: 1;
+  }
 
   .container {
     max-width: 1200px;
