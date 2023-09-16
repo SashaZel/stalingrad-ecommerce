@@ -8,7 +8,7 @@ export default function Document() {
           name="keywords"
           content="1/35, 1:35, масштаб, фигурки, солдатики, Stalingrad, Сталинград, resin, figures, смола, моделизм, диорама, РККА, Красная армия, Вермахт, немцы, пехотинец, танкист, офицер, ВОВ, Вторая мировая, 1941, 1942, 1943, 1944, 1945"
         />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8"></meta>
         <meta name="theme-color" content="#383838" />
         <meta property="og:image" content="/og-image.webp"/>
         <meta property="og:type" content="website"/>

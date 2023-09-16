@@ -2,8 +2,39 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Layout from "../../components/layout";
+import BestSellers, { IBestSellerData } from "../../components/best-sellers/BestSellers";
+import { getStaticDataFromLocal } from "../../lib/local-items-data";
+import { BEST_SELLERS, MAX_BEST_SELLER_SLIDE } from "../../content/content";
 
-export default function Home() {
+interface IHomeProps {
+  bestSellerData: IBestSellerData[];
+}
+
+export async function getStaticProps() {
+  if (BEST_SELLERS.length !== MAX_BEST_SELLER_SLIDE) {
+    console.error("@ BestSellers @getStaticProps() wrong length of bestsellers");
+  }
+  const bestSellerData: IBestSellerData[] = [];
+  for (let i = 0; i < BEST_SELLERS.length; i++) {
+    const itemData = await getStaticDataFromLocal(BEST_SELLERS[i]);
+    const itemDataBestSeller: IBestSellerData = {
+      id: itemData.id,
+      catName: itemData.catName,
+      catNameRUS: itemData.catNameRUS,
+      picture: itemData.pictures[0],
+      priceRetailRUB: itemData.prices.priceRetailRUB,
+    };
+    bestSellerData.push(itemDataBestSeller);
+  }
+
+  return {
+    props: {
+      bestSellerData,
+    },
+  };
+}
+
+export default function Home({ bestSellerData }: IHomeProps) {
   return (
     <Layout>
       <Head>
@@ -42,114 +73,111 @@ export default function Home() {
           </picture>
         </div>
       </section>
-      <section className={`container `}>
+      <section className={`container ${styles.featuresContainer}`}>
         <div>
-          <h3>Выберите фигурки для вашей новой идеи - более 300 оригинальных фигурок в каталоге.</h3>
+          <h3>Выберите фигурки для вашей новой идеи - <span className={styles.featuresHeaderSecond}>более 300 оригинальных фигурок в каталоге.</span></h3>
         </div>
-        <div>
+        <div className={`${styles.featuresRight}`}>
           <p>
-            Интернет-магазин Stalingrad-shop предлагает интересные фигурки одного из ведущих мировых производителей
-            смолы - компании Stalingrad. Фигурки изготовлены в России из качественной полиэфирной смолы. Интересные
+            Интернет-магазин Stalingrad-shop предлагает <span className={styles.featuresBold}>интересные фигурки одного из ведущих мировых производителей
+            смолы - компании Stalingrad.</span> Фигурки изготовлены в России из качественной полиэфирной смолы. Интересные
             темы, историческая достоверность, качественная скульптура, легкая сборка - все это фигурки Stalingrad. И тут
             вы можете приобрести их прямо от производителя.
           </p>
         </div>
       </section>
-      <section className="container">
-        <div>
+      <section className={`container ${styles.forCardsContainer}`}>
+        <div className={styles.forCard}>
           <h4>Для любителей истории ВОВ</h4>
-          <p>
+          <p className={styles.forCardPar}>
             История Великой Отечественной наша страсть. Большая часть ассортимента - это фигурки советских и немецких
             солдат на Восточном фронте. Вряд ли можно назвать еще один конфликт, ставший настолько явным воплощением
             борьбы Добра и Зла. Вряд ли ещё какое-либо событие истории нашей Родины было настолько тяжелым и
             героическим.
           </p>
-          <Link href="/">Все фигурки на ВОВ</Link>
+          <Link href="/" className={styles.forCardLink}>Все фигурки на ВОВ</Link>
         </div>
-        <div>
+        <div className={styles.forCard}>
           <h4>Для моделистов</h4>
-          <p>
+          <p className={styles.forCardPar}>
             Фигурки Stalingrad задуманы не просто как товар на продажу. Каждая фигурка, каждая серия фигурок - это
             готовая идея для диорамы или виньетки. Покупая набор Stalingrad вы покупаете небольшую историю, черновик для
             новой диорамы. Мы строим диорамы вместе, работаем сообща - Stalingrad дает вам очень интересный кубик в ваш
-            &quot;конструктор&quot;. Вам же остается придумать генеральную идею, композицию; собрать, покрасить все;
-            выбрать технику, основание, название.
+            &quot;конструктор&quot;.
           </p>
-          <Link href="/">Весь ассортимент</Link>
+          <Link href="/" className={styles.forCardLink}>Весь ассортимент</Link>
         </div>
-        <div>
+        <div className={styles.forCard}>
           <h4>Для Интернет-магазинов</h4>
-          <p>
+          <p className={styles.forCardPar}>
             Основной канал продаж Stalingrad - это самые лучшие и известные интернет-магазины России и мира. Посмотрите
             список наших дистрибьюторов. Многие успешно работают с нами уже более 10 лет. Уверен, все подтвердят: ясные
             четкие условия поставки и сроки - это наш конёк. Напишите нам, если тоже хотите продавать фигурки Stalingrad
           </p>
-          <Link href="/">Написать нам</Link>
+          <Link href="/" className={styles.forCardLink}>Написать нам</Link>
         </div>
       </section>
-      <section className="container">
-        <h3>О компании Stalingrad</h3>
-        <p>
+      <section className={styles.bestSection}>
+      <div className={styles.bestPicture}>
+          <picture>
+            <source srcSet="/img/work-area.webp" type="image/webp" />
+            <img className={styles.bestImage} src="/img/work-area.jpg" alt="hero poster" />
+          </picture>
+        </div>
+        <div className={styles.bestContent}>
+
+        <h3 className={styles.bestMainHeader}>О компании Stalingrad</h3>
+        <p className={styles.bestPar}>
           Stalingrad существует с 2008 года. Это сольный проект Александра Зеленкова. Главная цель - это производить
           интересные фигурки. Такие фигурки, которые бы дарили новые идеи, освобождали бы моделистов от узкого выбора
           типовых, традиционных сюжетов.
         </p>
         <div>
-          <h4>Идеи</h4>
-          <p>Позы, идеи, эмоции - вот за что нас любят. Наши фигурки не только стоят и идут.</p>
+          <h4 className={styles.bestSecondHeader}>Идеи</h4>
+          <p className={styles.bestPar}>Позы, идеи, эмоции - вот за что нас любят. Наши фигурки не только стоят и идут.</p>
         </div>
         <div>
-          <h4>Качество</h4>
-          <p>Фигурки изготовлены из специальной полиэфирной смолы. Качество наш пунктик.</p>
+          <h4 className={styles.bestSecondHeader}>Качество</h4>
+          <p className={styles.bestPar}>Фигурки изготовлены из специальной полиэфирной смолы. Качество наш пунктик.</p>
         </div>
         <div>
-          <h4>Ассортимент</h4>
-          <p>Более 300 наборов. РККА, немцы, начало войны, конец войны, гражданские, Первая мировая.</p>
+          <h4 className={styles.bestSecondHeader}>Ассортимент</h4>
+          <p className={styles.bestPar}>Более 300 наборов. РККА, немцы, начало войны, конец войны, гражданские, Первая мировая.</p>
         </div>
         <div>
-          <h4>Наличие</h4>
-          <p>Главный склад Stalingrad. Почти всё в наличии. Отправка в течении двух дней.</p>
+          <h4 className={styles.bestSecondHeader}>Наличие</h4>
+          <p className={styles.bestPar}>Главный склад Stalingrad. Почти всё в наличии. Отправка в течении двух дней.</p>
+        </div>
         </div>
       </section>
-      <section className="container">
-        <h2>Stalingrad-shop - интернет-магазин оригинальных смоляных фигурок из России.</h2>
-        <p>В ассортименте магазина представлено более 300 наборов фигурок Stalingrad.</p>
-        <div>
-          <Link href="/">Красная армия</Link>
-          <Link href="/">Немцы</Link>
-          <Link href="/">Гражданские</Link>
-          <Link href="/">Современка</Link>
-          <Link href="/">Первая мировая</Link>
-          <Link href="/">Фантастика</Link>
-          <Link href="/">Масштаб 1:35</Link>
-          <Link href="/">Масштаб 1:16</Link>
-          <Link href="/">Масштаб 1:48</Link>
-          <Link href="/items/all/1/">Все фигурки по номерам</Link>
-          <Link href="/items/all-by-date/1/">Все фигурки по дате релиза</Link>
+      <section className={styles.assortBG}>
+        <div className="container">
+
+        <h2 className={styles.assortHeader}>Stalingrad-shop - интернет-магазин оригинальных смоляных фигурок из России.</h2>
+        <p className={styles.assortPar}>В ассортименте магазина представлено более 300 наборов фигурок Stalingrad.</p>
+        <div className={styles.assortLinksContainer}>
+          <Link className={styles.assortLink} href="/">Красная армия</Link>
+          <Link className={styles.assortLink} href="/">Немцы</Link>
+          <Link className={styles.assortLink} href="/">Гражданские</Link>
+          <Link className={styles.assortLink} href="/">Современка</Link>
+          <Link className={styles.assortLink} href="/">Первая мировая</Link>
+          <Link className={styles.assortLink} href="/">Фантастика</Link>
+          <Link className={styles.assortLink} href="/">Масштаб 1:35</Link>
+          <Link className={styles.assortLink} href="/">Масштаб 1:16</Link>
+          <Link className={styles.assortLink} href="/">Масштаб 1:48</Link>
+          <Link className={styles.assortLink} href="/items/all/1/">Большие наборы</Link>
+          <Link className={styles.assortLink} href="/items/all/1/">Все фигурки по номерам</Link>
+          <Link className={`${styles.assortLink} ${styles.assortLinkAccent}`} href="/items/all-by-date/1/">Все фигурки по дате релиза</Link>
+        </div>
         </div>
       </section>
+      <BestSellers bestSellerData={bestSellerData} maxSlide={MAX_BEST_SELLER_SLIDE} />
       <section className="container">
-        <h2>Бестселлеры</h2>
-        <div>
-          <div>
-            <h3>S-3221</h3>
-            <h4>German tank crewman, 1943-45</h4>
-          </div>
-        </div>
-      </section>
-      <section className="container">
+        <h1 className={styles.warningMainHeader}>Внимание!</h1>
         <h2>
           В данный момент сайт находится в тестовом режиме и заказ фигурок не доступен. По всем вопросам пишите на
         </h2>
         <a href="mailto:stalingrad.figures@gmail.com">stalingrad.figures@gmail.com</a>
-      </section>
-      <section className="container">
-        <Link replace href="/items/all/1/">
-          all items by cat num
-        </Link>
-        <Link replace href="/items/all-by-date/1/">
-          all items by date
-        </Link>
       </section>
     </Layout>
   );

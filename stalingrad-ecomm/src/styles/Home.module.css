@@ -1,7 +1,7 @@
 .heroContainer {
   width: 100%;
   margin-top: -10rem;
-  height: 65rem;
+  height: 60rem;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -70,19 +70,135 @@
   height: 750px;
 }
 
+.featuresHeaderSecond {
+  color: var(--text-gray-second);
+}
+
+.featuresRight {
+  margin-top: 56px;
+}
+
+.featuresBold {
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.forCardsContainer {
+  margin-top: 54px;
+}
+
+.forCard {
+  margin-top: 16px;
+  padding: 56px 16px 24px 16px;
+  color: var(--text-black);
+  background-color: var(--banner-04);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.forCardPar {
+  margin-top: 16px;
+}
+
+.forCardLink {
+  margin-top: 24px;
+  width: fit-content;
+  display: block;
+  padding: 8px;
+  color: var(--text-gray-forth);
+  border: 1px solid var(--text-gray-forth);
+}
+
+.forCardLink:hover {
+  color: var(--text-gray-first);
+  background-color: var(--text-gray-forth);
+}
+
+.bestSection {
+  margin-top: 54px;
+  position: relative;
+  height: 800px;
+}
+
+.bestPicture {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  justify-content: flex-end;
+}
+
+.bestImage {
+  height: 800px;
+}
+
+.bestContent {
+  position: absolute;
+  bottom: 24px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 36px 8px 24px 8px;
+  background-color: var(--bg-second-semi-dense);
+}
+
+.bestSecondHeader {
+  margin-top: 24px;
+  color: var(--text-white);
+}
+
+.bestPar {
+  margin-top: 16px;
+  color: var(--text-gray-first);
+}
+
+.assortBG {
+  background: linear-gradient(45deg, var(--main-14), var(--main-10));
+}
+
+.assortHeader {
+  margin: 24px;
+  padding-top: 54px;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.assortPar {
+  margin: 24px;
+  color: var(--text-gray-second);
+  text-align: center;
+}
+
+.assortLink {
+  margin: 16px 24px;
+  padding:16px;
+  display: block;
+  background-color: var(--main-06);
+  font-size: 18px;
+}
+
+.assortLinkAccent {
+  background-color: var(--main-01);
+  color: var(--text-black);
+}
+
+.warningMainHeader {
+  margin-top: 72px;
+  margin-bottom: 16px;
+  color: var(--main-06);
+}
+
 /* ========== media ================================ */
 
 @media screen and (min-width: 640px) {
-
   .heroContainer {
     margin-top: -5rem;
     height: 60rem;
   }
-  
 }
 
 @media screen and (min-width: 768px) {
-
   .heroContainer {
     margin-top: -2rem;
     height: 60rem;
@@ -101,10 +217,14 @@
     justify-content: center;
   }
 
+  .featuresRight {
+    margin-left: 64px;
+    padding-left: 36px;
+    border-left: 2px solid var(--border-gray-first);
+  }
 }
 
 @media screen and (min-width: 1024px) {
-
   .heroContainer {
     height: 50rem;
     padding: 0;
@@ -118,10 +238,59 @@
     align-self: flex-end;
   }
 
+  .featuresContainer {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .forCardsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .bestSection {
+    height: auto;
+    display: flex;
+    gap: 36px;
+  }
+
+  .bestPicture {
+    position: relative;
+    width: 50%;
+  }
+
+  .bestImage {
+    height: 600px;
+  }
+
+  .bestContent {
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    width: 45%;
+    bottom: auto;
+  }
+
+  .assortHeader {
+    padding-top: 72px;
+    font-size: 26px;
+    letter-spacing: -1px;
+    text-align: left;
+  }
+  
+  .assortPar {
+    text-align: left;
+  }
+
+  .assortLinksContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 }
 
 @media screen and (min-width: 1280px) {
-
   .heroContainer {
     margin: 0;
     padding: 0;
@@ -148,5 +317,4 @@
     padding-left: 16px;
   }
 
-  
- }
+}

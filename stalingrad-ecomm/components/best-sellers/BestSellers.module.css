@@ -1,0 +1,55 @@
+.header {
+  margin-top: 72px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slidesWindow {
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slidesContainer {
+  position: absolute;
+  left: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.buttonsContainer {
+  display: flex;
+}
+
+.buttonMove {
+  margin-left: 16px;
+   width: 54px;
+   height: 54px;
+   display: flex;
+   align-items: center;
+   border: 1px solid var(--main-06);
+   border-radius: 50%;
+   background-color: var(--bg-second);
+   color: var(-text-gray-first);
+}
+
+.buttonMove:hover {
+  color: var(--text-white);
+}
+
+.buttonMove:active {
+  color: var(--main-06);
+}
+ 
+.buttonRight {
+  transform: rotate(180deg);
+}
+
+.inactiveButton, .inactiveButton:hover, .inactiveButton:active {
+  color: var(--text-gray-forth);
+}
