@@ -153,6 +153,7 @@
 }
 
 .assortBG {
+  padding-bottom: 16px;
   background: linear-gradient(45deg, var(--main-14), var(--main-10));
 }
 

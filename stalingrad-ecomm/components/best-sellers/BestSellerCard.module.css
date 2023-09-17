@@ -1,13 +1,18 @@
 .container {
-  margin: 16px 24px;
+  box-sizing: content-box;
+  /* margin: 16px 24px; */
   padding: 24px 16px;
-  width: 352px;
+  width: 340px;
   text-align: center;
+  flex: 0 0 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   background: linear-gradient(45deg, var(--bg-second), var(--border-gray-second));
+  /* scroll-snap-stop: always; */
+  scroll-snap-align: center;
+
 }
 
 

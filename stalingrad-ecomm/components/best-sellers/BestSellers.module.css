@@ -6,36 +6,45 @@
 }
 
 .slidesWindow {
+  margin-top: 36px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   width: 100%;
-  height: 480px;
-  overflow: hidden;
+  height: 400px;
+  overflow-x: scroll;
   position: relative;
+  scroll-behavior: smooth;
+  display: flex;
+  gap: 24px;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 50%;
 }
 
 .slidesContainer {
   position: absolute;
-  left: 0;
+  left: auto;
   width: fit-content;
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
+  overflow-x: scroll;
   transition: all 0.3s;
+  scroll-padding: 0 50%;
 }
 
 .buttonsContainer {
-  display: flex;
+  display: none;
 }
 
 .buttonMove {
   margin-left: 16px;
-   width: 54px;
-   height: 54px;
-   display: flex;
-   align-items: center;
-   border: 1px solid var(--main-06);
-   border-radius: 50%;
-   background-color: var(--bg-second);
-   color: var(-text-gray-first);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--main-06);
+  border-radius: 50%;
+  background-color: var(--bg-second);
+  color: var(-text-gray-first);
 }
 
 .buttonMove:hover {
@@ -45,11 +54,29 @@
 .buttonMove:active {
   color: var(--main-06);
 }
- 
+
 .buttonRight {
   transform: rotate(180deg);
 }
 
-.inactiveButton, .inactiveButton:hover, .inactiveButton:active {
+.inactiveButton,
+.inactiveButton:hover,
+.inactiveButton:active {
   color: var(--text-gray-forth);
+}
+
+@media screen and (min-width: 1024px) {
+  .buttonsContainer {
+    display: flex;
+  }
+
+  .slidesWindow {
+    scroll-padding: auto;
+  }
+
+  .slidesContainer {
+    left: 0;
+    scroll-snap-stop: normal;
+    overflow: hidden;
+  }
 }

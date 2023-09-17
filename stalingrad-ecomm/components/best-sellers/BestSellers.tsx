@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./BestSellers.module.css";
 import IconArrowLeft from "../icons/IconArrowLeft";
 import { IItemLocalPicture } from "../../lib/types";
@@ -17,48 +17,38 @@ interface IBestSellerProps {
   maxSlide: number;
 }
 
-
 export default function BestSellers({ maxSlide, bestSellerData }: IBestSellerProps) {
-  const [slide, setSlide] = useState(0);
+  const slidesWindowRef = useRef(null);
 
   const moveLeft = () => {
-    if (slide === 0) {
-      return;
-    }
-    setSlide((slide) => slide - 1);
+    if (slidesWindowRef.current === null) return;
+    const slidesWindow = slidesWindowRef.current as HTMLDivElement;
+    slidesWindow.scrollLeft -= 400;
   };
 
   const moveRight = () => {
-    if (slide === maxSlide - 3) {
-      return;
-    }
-    setSlide((slide) => slide + 1);
+    if (slidesWindowRef.current === null) return;
+    const slidesWindow = slidesWindowRef.current as HTMLDivElement;
+    slidesWindow.scrollLeft += 400;
   };
 
-  const slides = bestSellerData.map((data) => <BestSellerCard key={data.id} {...data} />)
+  const slides = bestSellerData.map((data) => <BestSellerCard key={data.id} {...data} />);
 
   return (
     <section className="container">
       <div className={styles.header}>
         <h2>Бестселлеры</h2>
         <div className={styles.buttonsContainer}>
-          <button className={`${styles.buttonMove} ${slide === 0 ? styles.inactiveButton : ""}`} onClick={moveLeft}>
+          <button className={`${styles.buttonMove}`} onClick={moveLeft}>
             <IconArrowLeft />
           </button>
-          <button
-            className={`${styles.buttonMove} ${styles.buttonRight} ${
-              slide === maxSlide - 3 ? styles.inactiveButton : ""
-            }`}
-            onClick={moveRight}
-          >
+          <button className={`${styles.buttonMove} ${styles.buttonRight}`} onClick={moveRight}>
             <IconArrowLeft />
           </button>
         </div>
       </div>
-      <div className={styles.slidesWindow}>
-        <div className={styles.slidesContainer} style={{ left: `-${slide * 400}px` }}>
-          {slides}
-        </div>
+      <div className={`${styles.slidesWindow} styledScrollbar`} ref={slidesWindowRef}>
+        {slides}
       </div>
     </section>
   );
