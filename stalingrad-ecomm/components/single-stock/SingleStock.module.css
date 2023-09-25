@@ -1,0 +1,77 @@
+.priceCard {
+  margin-top: 36px;
+  margin-bottom: 24px;
+  padding: 48px 16px 24px 16px;
+  background-color: var(--border-gray-second);
+  width: fit-content;
+}
+
+.price {
+  color: var(--text-white);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quantityRow {
+  display: flex;
+  width: fit-content;
+  gap: 16px;
+}
+
+.quantityButtons {
+  width: fit-content;
+  background-color: var(--text-white);
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.decIncButtons {
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: inherit;
+  color: var(--text-black);
+}
+
+.inputQuantity {
+  font-size: 18px;
+  padding: 8px;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+}
+
+.cartButton {
+  padding-left: 24px;
+  padding-right: 24px;
+  background-color: var(--main-06);
+}
+
+.cartButton:disabled {
+  background-color: var(--text-gray-third);
+}
+
+.stock {
+  margin-top: 8px;
+  color: var(--text-gray-second);
+  /* border-top: 1px solid var(--text-gray-second); */
+}
+
+.grayText {
+  color: var(--text-gray-second);
+}
+
+.greenLine {
+  margin-top: 8px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--green-first), var(--green-second)) ;
+}

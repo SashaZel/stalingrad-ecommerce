@@ -1,3 +1,5 @@
+import styles from "./StockInList.module.css";
+
 interface IStockInListProps {
   data: {
     brand: string;
@@ -11,10 +13,10 @@ interface IStockInListProps {
 
 export function StockInList({ data, isLoading, isError, currentID }: IStockInListProps) {
   if (isLoading) {
-    return <span>...Load</span>;
+    return <span className={`${styles.block} ${styles.gray}`}>...Загрузка</span>;
   }
   if (isError) {
-    return <span>no stock data</span>;
+    return <span className={`${styles.block} ${styles.gray}`}>Нет данных</span>;
   }
   const [currentBrand, currentCatNum] = currentID.split("-");
   let stock;
@@ -23,6 +25,8 @@ export function StockInList({ data, isLoading, isError, currentID }: IStockInLis
       stock = dataEl.stock;
     }
   });
-  const stockMessage = Number(stock) && Number(stock) > 0 ? "In stock" : "Out of stock";
-  return <span>{stockMessage}</span>;
+  if (Number(stock) && Number(stock) > 0) {
+    return <span className={`${styles.block} ${styles.green}`}>В наличии</span>;
+  }
+  return <span className={`${styles.block} ${styles.red}`}>Нет в наличии</span>;
 }

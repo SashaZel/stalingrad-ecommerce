@@ -47,7 +47,12 @@ export interface IItemDataLimited {
   catNameRUS: string;
   prices: {
     priceRetailRUB: number;
-  }
+  };
+  previewPicture: {
+    pictureName: string;
+    width: number;
+    height: number;
+  };
 }
 
 export const ITEM_DATA_LOCAL_EXAMPLE: IItemLocalJSON = {

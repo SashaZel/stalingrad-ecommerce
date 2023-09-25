@@ -76,7 +76,22 @@
   left: 0;
   transition: all 0.5s;
   height: 80vh;
+  /* height: fit-content; */
   overflow-y: scroll;
+}
+
+.menuShow::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+ 
+.menuShow::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px var(--bg-first);
+}
+ 
+.menuShow::-webkit-scrollbar-thumb {
+  background-color: var(--bg-first);
+  outline: 1px solid var(--bg-first);
 }
 
 .menuElement {
@@ -149,7 +164,7 @@
 
 .main {
   width: 100%;
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 
 .footer {
@@ -270,9 +285,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .main {
-    margin-top: 10vh;
-  }
 
   .footerContact {
     display: grid;

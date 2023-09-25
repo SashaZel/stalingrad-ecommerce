@@ -1,0 +1,19 @@
+.container {
+  margin-top: 36px;
+  padding-top: 16px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1px solid var(--border-gray-first);
+  color: var(--text-gray-second);
+}
+
+.pageNumber {
+  padding: 4px;
+}
+
+.activePage {
+  color: var(--text-white);
+  border-bottom: 4px solid var(--main-06);
+}

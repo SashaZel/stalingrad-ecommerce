@@ -54,6 +54,9 @@
   --green-second: #413620;
   --blue-first: #343453;
   --blue-second: #181836;
+  --green-first: #3b4726;
+  --green-second: #4e7f06;
+
 }
 
 * {
@@ -83,7 +86,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 1em;
+  width: 8px;
 }
  
 body::-webkit-scrollbar-track {
@@ -98,7 +101,7 @@ body::-webkit-scrollbar-thumb {
 h1 {
   font-size: 2rem;
   font-weight: bold;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   line-height: 1;
 }
 
@@ -174,7 +177,8 @@ a:focus {
 }
 
 .styledScrollbar::-webkit-scrollbar {
-  width: 1em;
+  width: 6px;
+  height: 6px;
 }
  
 .styledScrollbar::-webkit-scrollbar-track {

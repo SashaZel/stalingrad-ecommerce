@@ -1,18 +1,12 @@
-import Link from "next/link";
 import { useBatchStock } from "../../../../../api/useBatchStock";
-import { StockInList } from "../../../../../components/StockInList";
-import {
-  allCatByDatePaginated,
-  allCatPaginated,
-  getStaticDataFromLocal,
-  getStaticPathsFromLocalData,
-} from "../../../../../lib/local-items-data";
+import { allCatByDatePaginated, getStaticDataFromLocal } from "../../../../../lib/local-items-data";
 import { IItemDataLimited } from "../../../../../lib/types";
 import { paginateArray } from "../../../../../lib/utils";
 import Head from "next/head";
 import Layout from "../../../../../components/layout";
-import { ItemRow } from "../../../../../components/ItemRow";
-import { PaginationNav } from "../../../../../components/PaginationNav";
+import { ItemCard } from "../../../../../components/item-card/ItemCard";
+import { PaginationNav } from "../../../../../components/pagination-nav/PaginationNav";
+import styles from "../../../../styles/ShopListLayout.module.css";
 
 interface IAllItemsPageProps {
   currentItemsData: IItemDataLimited[];
@@ -31,7 +25,6 @@ export async function getStaticPaths() {
     };
   });
 
-  //console.log("Paths ", paths);
   return {
     paths,
     fallback: false,
@@ -55,6 +48,7 @@ export async function getStaticProps(pathData: { params: { page: string } }) {
       prices: {
         priceRetailRUB: itemData.prices.priceRetailRUB,
       },
+      previewPicture: itemData.pictures[0].previewSize,
     };
     currentItemsData.push(itemDataLimited);
   }
@@ -75,7 +69,7 @@ export default function AllItemsPage({ currentItemsData, currentPage, totalPages
 
   const pageTitle = `All items by date: Page-${currentPage}`;
   const catPreview = currentItemsData.map((item) => (
-    <ItemRow key={item.id} item={item} data={data} isLoading={isLoading} isError={isError} />
+    <ItemCard key={item.id} item={item} data={data} isLoading={isLoading} isError={isError} />
   ));
 
   return (
@@ -85,15 +79,8 @@ export default function AllItemsPage({ currentItemsData, currentPage, totalPages
         <meta name="description" content="Каталог фигурок Stalingrad масштаб 1/35"></meta>
       </Head>
       <section className="container">
-        <h1>Hello dear friends</h1>
-        <h2>h2 Hello dear friend</h2>
-        <h3>h3Hekko dfdfasd dfasdf</h3>
-        <h4>h4Hoole adde eekfje </h4>
-        <h5>h5</h5>
-        <p>this is p</p>
-        Hi, these items sort by date
-        <ul>{catPreview}</ul>
-        <PaginationNav  currentPage={currentPage} totalPages={totalPages} linkPredicate="/items/all-by-date/" />
+        <div className={styles.container}>{catPreview}</div>
+        <PaginationNav currentPage={currentPage} totalPages={totalPages} linkPredicate="/items/all-by-date/" />
       </section>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useBatchStock } from "../../../../../api/useBatchStock";
-import { StockInList } from "../../../../../components/StockInList";
+import { StockInList } from "../../../../../components/stock-in-list/StockInList";
 import {
   allCatPaginated,
   getStaticDataFromLocal,
@@ -10,8 +10,9 @@ import { IItemDataLimited } from "../../../../../lib/types";
 import { paginateArray } from "../../../../../lib/utils";
 import Head from "next/head";
 import Layout from "../../../../../components/layout";
-import { ItemRow } from "../../../../../components/ItemRow";
-import { PaginationNav } from "../../../../../components/PaginationNav";
+import { ItemCard } from "../../../../../components/item-card/ItemCard";
+import { PaginationNav } from "../../../../../components/pagination-nav/PaginationNav";
+import styles from "../../../../styles/ShopListLayout.module.css";
 
 interface IAllItemsPageProps {
   currentItemsData: IItemDataLimited[];
@@ -54,6 +55,7 @@ export async function getStaticProps(pathData: { params: { page: string } }) {
       prices: {
         priceRetailRUB: itemData.prices.priceRetailRUB,
       },
+      previewPicture: itemData.pictures[0].previewSize,
     };
     currentItemsData.push(itemDataLimited);
   }
@@ -74,7 +76,7 @@ export default function AllItemsPage({ currentItemsData, currentPage, totalPages
 
   const pageTitle = `All items: Page-${currentPage}`;
   const catPreview = currentItemsData.map((item) => (
-    <ItemRow key={item.id} item={item} data={data} isLoading={isLoading} isError={isError} />
+    <ItemCard key={item.id} item={item} data={data} isLoading={isLoading} isError={isError} />
   ));
 
   return (
@@ -83,9 +85,8 @@ export default function AllItemsPage({ currentItemsData, currentPage, totalPages
         <title>{pageTitle}</title>
       </Head>
       <section className="container">
-        Hi cat page
-        <ul>{catPreview}</ul>
-        <PaginationNav  currentPage={currentPage} totalPages={totalPages} linkPredicate="/items/all/" />
+        <div className={styles.container}>{catPreview}</div>
+        <PaginationNav currentPage={currentPage} totalPages={totalPages} linkPredicate="/items/all/" />
       </section>
     </Layout>
   );

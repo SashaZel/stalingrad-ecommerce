@@ -1,0 +1,18 @@
+.block {
+  margin-top: 8px;
+  display: block;
+  padding: 4px 6px;
+  width: fit-content;
+}
+
+.red {
+  background-color: var(--main-06);
+}
+
+.green {
+  background-color: var(--green-second);
+}
+
+.gray {
+  background-color: var(--border-gray-first);
+}

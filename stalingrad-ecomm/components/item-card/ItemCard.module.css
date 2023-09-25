@@ -1,0 +1,61 @@
+.container {
+  padding: 16px 4px 16px 4px;
+  background: linear-gradient(45deg, var(--bg-second), var(--border-gray-second));
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+.wideContainer {
+  grid-column-start: span 2;
+}
+
+.top {
+  width: 100%;
+  max-width: 350px;
+}
+
+.pictureContainer {
+  display: block;
+}
+
+.picture {
+  display: block;
+  max-width: 250px;
+}
+
+.header {
+  margin-top: 16px;
+  display: block;
+}
+
+.catNum {
+  font-weight: bold;
+}
+
+.catName {
+  color: var(--text-gray-second);
+}
+
+.price {
+  margin-top: 8px;
+}
+
+.priceNumber {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 1280px) {
+
+  .picture {
+    max-width: 350px;
+  }
+
+  .wideContainer {
+    flex-direction: row;
+    justify-content: baseline;
+    gap: 16px;
+  }
+
+}

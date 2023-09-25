@@ -1,0 +1,33 @@
+.breadcrumbs {
+  text-align: left;
+}
+
+.breadcrumb {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--text-gray-third);
+}
+
+.contentRight {
+  margin-top: 24px;
+}
+
+.contentID {
+  color: var(--text-gray-second);
+}
+
+.contentHeader {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+
+
+
+@media screen and (min-width: 1024px) {
+  .content {
+    display: flex;
+    gap: 36px;
+  }
+
+}
