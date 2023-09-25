@@ -19,7 +19,7 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
   const [cart, setCart] = useAtom(cartAtom);
-  const stock = Number(data.stock);
+  const stock = Number(data?.stock);
   // const stock = 0;
 
   // console.log('render SingleStock')
