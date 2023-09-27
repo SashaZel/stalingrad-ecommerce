@@ -14,5 +14,6 @@ export function paginateArray(arr: string[], itemsPerPage: number): ICatPaginate
       page = [];
     }
   }
+  if (result.length === 0) result.push([]);
   return result;
 }

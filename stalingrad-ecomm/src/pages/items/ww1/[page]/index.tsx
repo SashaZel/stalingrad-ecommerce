@@ -5,7 +5,7 @@ import Layout from "../../../../../components/layout";
 import { ItemsPage } from "../../../../../components/items-page/ItemsPage";
 import { getStaticPathsHelper, getStaticPropsHelper } from "../../../../../lib/items-page-helpers";
 
-const PAGE_KEY: keyof typeof TAGS_GROUPS = "allByDate";
+const PAGE_KEY: keyof typeof TAGS_GROUPS = "wwOne";
 
 export async function getStaticPaths() {
   return getStaticPathsHelper(PAGE_KEY);

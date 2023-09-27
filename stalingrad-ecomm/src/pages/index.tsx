@@ -58,10 +58,10 @@ export default function Home({ bestSellerData }: IHomeProps) {
             <br /> всегда оригинальные фигурки для ваших диорам.
           </p>{" "}
           <div className={styles.heroButtonsContainer}>
-            <Link className={`${styles.heroButton} ${styles.heroButtonDark}`} href="/">
+            <Link className={`${styles.heroButton} ${styles.heroButtonDark}`} href="/items/all-by-date/1/">
               Смотреть каталог
             </Link>
-            <Link className={`${styles.heroButton} ${styles.heroButtonLight}`} href="/">
+            <Link className={`${styles.heroButton} ${styles.heroButtonLight}`} href="/items/all-by-date/1/">
               Узнать больше
             </Link>
           </div>
@@ -95,7 +95,7 @@ export default function Home({ bestSellerData }: IHomeProps) {
             борьбы Добра и Зла. Вряд ли ещё какое-либо событие истории нашей Родины было настолько тяжелым и
             героическим.
           </p>
-          <Link href="/" className={styles.forCardLink}>Все фигурки на ВОВ</Link>
+          <Link href="/items/all-by-date/1/" className={styles.forCardLink}>Все фигурки на ВОВ</Link>
         </div>
         <div className={styles.forCard}>
           <h4>Для моделистов</h4>
@@ -105,7 +105,7 @@ export default function Home({ bestSellerData }: IHomeProps) {
             новой диорамы. Мы строим диорамы вместе, работаем сообща - Stalingrad дает вам очень интересный кубик в ваш
             &quot;конструктор&quot;.
           </p>
-          <Link href="/" className={styles.forCardLink}>Весь ассортимент</Link>
+          <Link href="/items/all-by-date/1/" className={styles.forCardLink}>Весь ассортимент</Link>
         </div>
         <div className={styles.forCard}>
           <h4>Для Интернет-магазинов</h4>
@@ -114,7 +114,7 @@ export default function Home({ bestSellerData }: IHomeProps) {
             список наших дистрибьюторов. Многие успешно работают с нами уже более 10 лет. Уверен, все подтвердят: ясные
             четкие условия поставки и сроки - это наш конёк. Напишите нам, если тоже хотите продавать фигурки Stalingrad
           </p>
-          <Link href="/" className={styles.forCardLink}>Написать нам</Link>
+          <Link href="/items/all-by-date/1/" className={styles.forCardLink}>Написать нам</Link>
         </div>
       </section>
       <section className={styles.bestSection}>
@@ -156,15 +156,15 @@ export default function Home({ bestSellerData }: IHomeProps) {
         <h2 className={styles.assortHeader}>Stalingrad-shop - интернет-магазин оригинальных смоляных фигурок из России.</h2>
         <p className={styles.assortPar}>В ассортименте магазина представлено более 300 наборов фигурок Stalingrad.</p>
         <div className={styles.assortLinksContainer}>
-          <Link className={styles.assortLink} href="/">Красная армия</Link>
-          <Link className={styles.assortLink} href="/">Немцы</Link>
+          <Link className={styles.assortLink} href="/items/red-army/1/">Красная армия</Link>
+          <Link className={styles.assortLink} href="/items/germans/1/">Немцы</Link>
           <Link className={styles.assortLink} href="/">Гражданские</Link>
           <Link className={styles.assortLink} href="/">Современка</Link>
-          <Link className={styles.assortLink} href="/">Первая мировая</Link>
+          <Link className={styles.assortLink} href="/items/ww1/1/">Первая мировая</Link>
           <Link className={styles.assortLink} href="/">Фантастика</Link>
-          <Link className={styles.assortLink} href="/">Масштаб 1:35</Link>
-          <Link className={styles.assortLink} href="/">Масштаб 1:16</Link>
-          <Link className={styles.assortLink} href="/">Масштаб 1:48</Link>
+          <Link className={styles.assortLink} href="/items/35-scale/1/">Масштаб 1:35</Link>
+          <Link className={styles.assortLink} href="/items/16-scale/1/">Масштаб 1:16</Link>
+          <Link className={styles.assortLink} href="/items/48-scale/1/">Масштаб 1:48</Link>
           <Link className={styles.assortLink} href="/items/all/1/">Большие наборы</Link>
           <Link className={styles.assortLink} href="/items/all/1/">Все фигурки по номерам</Link>
           <Link className={`${styles.assortLink} ${styles.assortLinkAccent}`} href="/items/all-by-date/1/">Все фигурки по дате релиза</Link>

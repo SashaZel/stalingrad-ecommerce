@@ -155,3 +155,12 @@ export const ITEM_DATA_LOCAL_EXAMPLE: IItemLocalJSON = {
   "bigSetData": { "isBigSet": false, "includesSets": [], "partOfSets": [] },
   "rating": 0
 }
+
+export interface IItemsPageProps {
+  currentItemsData: IItemDataLimited[];
+  currentPage: number;
+  totalPages: number;
+  currentEnv: "dev" | "prod";
+  headerRUS: string;
+  route: string;
+}

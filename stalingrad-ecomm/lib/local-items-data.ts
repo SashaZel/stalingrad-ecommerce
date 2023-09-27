@@ -6,15 +6,15 @@ const PATH_TO_ESHOP_DATA_PROD = process.env.PATH_TO_ESHOP_DATA_PROD;
 const PATH_TO_ESHOP_DATA_TEST = process.env.PATH_TO_ESHOP_DATA_TEST;
 
 // const PATH = PATH_TO_ESHOP_DATA_TEST;
-const PATH = PATH_TO_ESHOP_DATA_PROD;
 
 export interface IStaticPathData {
   params: {
     item: string;
   };
 }
-
 export type ICatPaginated = string[][];
+
+const PATH = PATH_TO_ESHOP_DATA_PROD;
 
 const DUMMY_PATHS: IStaticPathData[] = [
   {
@@ -74,7 +74,7 @@ async function getAllCatPaginated(): Promise<ICatPaginated> {
   itemsList.forEach((fileName, i) => {
     itemsList[i] = fileName.split(".")[0];
   });
-  const itemsListPaginated = paginateArray(itemsList, 25);
+  const itemsListPaginated = paginateArray(itemsList, 40);
 
   //console.log(itemsList);
   return itemsListPaginated;
@@ -143,7 +143,7 @@ async function getAllCatByDatePaginated(): Promise<ICatPaginated> {
     return [[]];
   }
   const itemsListSortByDate = await sortItemsByDate(itemsList);
-  const itemsListPaginated = paginateArray(itemsListSortByDate, 25);
+  const itemsListPaginated = paginateArray(itemsListSortByDate, 40);
 
   //console.log(itemsList);
   return itemsListPaginated;
@@ -154,3 +154,177 @@ async function getAllCatByDatePaginated(): Promise<ICatPaginated> {
 }
 
 export const allCatByDatePaginated = getAllCatByDatePaginated();
+
+// Create collections by tags
+
+function filterItemsByTagList(
+  listWithItemsData: IItemLocalJSON[],
+  // fileNamesList: string[], 
+  tags: string[], 
+  isSortedByDate: boolean
+  ): string[] {
+  // const listWithItemsData = [];
+  // for (let i = 0; i < fileNamesList.length; i++) {
+  //   try {
+  //     const content = await readFile(`${PATH}\\${fileNamesList[i]}`, {
+  //       encoding: "utf8",
+  //     });
+  //     const itemData = JSON.parse(content) as IItemLocalJSON;
+  //     if (!itemData) throw new Error("itemData is undefined");
+  //     listWithItemsData.push(itemData);
+  //   } catch (error) {
+  //     console.error("@filterItemsByTagList() error in reading file", fileNamesList[i]);
+  //   }
+  // }
+  const filteredList = listWithItemsData.filter((item) => {
+    let isValid = true;
+    for (let j = 0; j < tags.length; j++) {
+      // console.log(item.tags)
+      if (!item.tags.includes(tags[j])) isValid = false;
+    }
+    return isValid;
+  })
+  if (isSortedByDate) {
+    filteredList.sort((a,b) => {
+      if(a.releaseDate > b.releaseDate) return -1;
+      if(a.releaseDate < b.releaseDate) return 1;
+      return 0;
+    });
+  }
+  const listWithoutDeprecated = filteredList.filter((item) => !item.tags.includes("deprecated"));
+  const result = listWithoutDeprecated.map((item) => item.id);
+  return result;
+}
+
+// WW1
+
+// async function getWW1Paginated(): Promise<ICatPaginated> {
+//   const itemsList = await getFileNames(PATH);
+//   if (!itemsList) {
+//     console.error("@getAllCatPaginated() Error: no path provided");
+//     return [[]];
+//   }
+
+//   const filteredItems = await filterItemsByTagList(itemsList, ["WW1"], false);
+//   const itemsListPaginated = paginateArray(filteredItems, 40);
+//   return itemsListPaginated;
+// }
+
+// export const allWW1Paginated = getWW1Paginated();
+
+// Red Army
+
+// async function getRedArmyPaginated(): Promise<ICatPaginated> {
+//   const itemsList = await getFileNames(PATH);
+//   if (!itemsList) {
+//     console.error("@getAllCatPaginated() Error: no path provided");
+//     return [[]];
+//   }
+  
+//   const filteredItems = await filterItemsByTagList(itemsList, ["Red Army"], false);
+//   const itemsListPaginated = paginateArray(filteredItems, 40);
+//   return itemsListPaginated;
+// }
+
+// export const allRedArmyPaginated = getRedArmyPaginated();
+
+// Load data
+
+interface ICategory {
+  tags: string[];
+  isSortedByDate: boolean;
+  route: string;
+  headerRUS: string;
+  itemsPaginated?: ICatPaginated
+}
+
+interface ITagsGroups {
+  [name: string]: ICategory
+}
+
+export const TAGS_GROUPS: ITagsGroups = {
+  all: {
+    tags: [],
+    isSortedByDate: false,
+    route: "all",
+    headerRUS: "Все фигурки по номерам"
+  },
+  allByDate: {
+    tags: [],
+    isSortedByDate: true,
+    route: "all-by-date",
+    headerRUS: "Все фигурки по дате релиза"
+  },
+  redArmy: {
+    tags: ["Red Army"],
+    isSortedByDate: false,
+    route: "red-army",
+    headerRUS: "Красная Армия"
+  },
+  wwOne: {
+    tags: ["WW1"],
+    isSortedByDate: false,
+    route: "ww1",
+    headerRUS: "Первая мировая война"
+  },
+  scaleSixteen: {
+     tags: ["scale_1/16"],
+     isSortedByDate: false,
+     route: "16-scale",
+     headerRUS: "Масштаб 1:16"
+  }, 
+  scaleThirtyFive: {
+    tags: ["scale_1/35"], 
+    isSortedByDate: false,
+    route: "35-scale", 
+    headerRUS: "Масштаб 1:35"
+  },
+  scaleFortyEight: {
+    tags: ["scale_1/48"],
+    isSortedByDate: false,
+    route: "48-scale",
+    headerRUS: "Масштаб 1:48"
+  },
+  germans: {
+    tags: ["Germans"],
+    isSortedByDate: false,
+    route: "germans",
+    headerRUS: "Германия"
+  }
+};
+
+async function loadAppData(path: string | undefined, tagsGroups: ITagsGroups) {
+  if (!path) {
+    console.error("@loadAppData() Error: no PATH provided");
+    return {}
+  }
+  const fileNames = await getFileNames(path);
+  if (!fileNames) {
+    console.error("@loadAppData() Error: no fileNames");
+    return {}
+  }
+  const itemsData = [];
+  for (let i = 0; i < fileNames.length; i++) {
+    try {
+      const content = await readFile(`${path}\\${fileNames[i]}`, {
+        encoding: "utf8",
+      });
+      const itemData = JSON.parse(content) as IItemLocalJSON;
+      if (!itemData) throw new Error("itemData is undefined");
+      itemsData.push(itemData);
+    } catch (error) {
+      console.error("@filterItemsByTagList() error in reading file", fileNames[i]);
+    }
+  }
+  const appData: ITagsGroups = {};
+  for (const tagsGroup in tagsGroups) {
+     const filtered = filterItemsByTagList(itemsData, tagsGroups[tagsGroup].tags, tagsGroups[tagsGroup].isSortedByDate);
+     appData[tagsGroup] = {
+      ...tagsGroups[tagsGroup],
+      itemsPaginated: paginateArray(filtered, 40)
+     } 
+  }
+  return appData;
+}
+
+export const appData = loadAppData(PATH, TAGS_GROUPS);
