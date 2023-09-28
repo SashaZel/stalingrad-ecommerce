@@ -101,7 +101,7 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
 
   const stockQuantity = stock > 5 ? "В наличии" : `В наличии ${stock} шт.`;
   const stockMsg =
-    stock === 0 ? (
+    stock <= 0 ? (
       <>
         <p className={styles.stock}>Нет в наличии.</p>
         <p>
@@ -116,28 +116,28 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
     <div>
       <div className={styles.priceCard}>
         <p className={styles.price}>{priceRUB} руб.</p>
-        <div className={stock === 0 ? styles.redLine : styles.greenLine}></div>
+        <div className={stock <= 0 ? styles.redLine : styles.greenLine}></div>
         {stockMsg}
       </div>
       {errorMessage}
       <div className={styles.info}>В корзине {quantityInCard} шт. </div>
       <div className={styles.quantityRow}>
         <div className={styles.quantityButtons}>
-          <button disabled={stock === 0} className={styles.decIncButtons} onClick={() => decrementQuantity()}>
+          <button disabled={stock <= 0} className={styles.decIncButtons} onClick={() => decrementQuantity()}>
             <IconMinus />
           </button>
           <input
-            disabled={stock === 0}
+            disabled={stock <= 0}
             className={styles.inputQuantity}
             type="text"
             value={quantity}
             onChange={(e) => handleChangeQuantity(e)}
           />
-          <button disabled={stock === 0} className={styles.decIncButtons} onClick={() => incrementQuantity()}>
+          <button disabled={stock <= 0} className={styles.decIncButtons} onClick={() => incrementQuantity()}>
             <IconPlus />
           </button>
         </div>
-        <button disabled={stock === 0} className={styles.cartButton} onClick={(e) => handleAddItemToCard(e)}>
+        <button disabled={stock <= 0} className={styles.cartButton} onClick={(e) => handleAddItemToCard(e)}>
           В корзину
         </button>
       </div>
