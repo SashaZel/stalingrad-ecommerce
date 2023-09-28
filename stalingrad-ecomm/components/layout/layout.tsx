@@ -1,8 +1,10 @@
 import { useAtomValue } from "jotai/react";
 import styles from "./layout.module.css";
-import { cartAtom } from "../lib/store";
+import { cartAtom } from "../../lib/store";
 import Link from "next/link";
 import { useState } from "react";
+import IconGitHub from "../icons/IconGitHub";
+import WarningMessage from "../warning-message/WarningMessage";
 
 export default function Layout({ children }: { children: JSX.Element[] }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -27,8 +29,16 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
             <nav className={`${styles.menu} ${showMobileMenu ? styles.menuShow : ""}`}>
               <ul className={styles.menuContainer}>
                 <li className={styles.menuElement}>
-                  <div onClick={() => setShowCatalogueSubmenu((state) => !state)} className={`${styles.menuLink} ${styles.menuLinkWithArrow}`}>
-                    <img className={`${styles.arrowIcon} ${showCatalogueSubmenu ? styles.arrowIconUp : ""}`} src="/img/icon-arrow.svg" alt="icon" /><div>Каталог</div>
+                  <div
+                    onClick={() => setShowCatalogueSubmenu((state) => !state)}
+                    className={`${styles.menuLink} ${styles.menuLinkWithArrow}`}
+                  >
+                    <img
+                      className={`${styles.arrowIcon} ${showCatalogueSubmenu ? styles.arrowIconUp : ""}`}
+                      src="/img/icon-arrow.svg"
+                      alt="icon"
+                    />
+                    <div>Каталог</div>
                   </div>
                   <ul className={`${styles.nestedMenu} ${showCatalogueSubmenu ? styles.nestedMenuShow : ""}`}>
                     <div className={styles.nestedMenuWithColumn}>
@@ -44,57 +54,57 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/all-by-date/1/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/best-sellers/1/">
                             Бестселлеры
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/all-by-date/1/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/eastern-front/1/">
                             Все фигурки ВОВ
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/red-army/1/">
                             Красная армия
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/germans/1/">
                             Немцы
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/civilians/1/">
                             Гражданские
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/35-scale/1/">
                             Масштаб 1:35
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/16-scale/1/">
                             Масштаб 1:16
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/48-scale/1/">
                             Масштаб 1:48
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/modern/1/">
                             Современка
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/modern/1/">
                             Первая мировая
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/sci-fi/1/">
                             Фантастика
                           </Link>
                         </li>
@@ -106,7 +116,7 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
                         <picture>
                           <source srcSet="/img/icon-live-01.webp" type="image/webp" />
 
-                        <img className={styles.submenuRightImage} src="/img/icon-live-01.png" alt="icon" />
+                          <img className={styles.submenuRightImage} src="/img/icon-live-01.png" alt="icon" />
                         </picture>
                       </div>
                     </div>
@@ -164,10 +174,16 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
           </div>
         </div>
       </header>
-      <main className={styles.main} onClick={() => {
-        setShowMobileMenu(false);
-        setShowCatalogueSubmenu(false);
-      }}>{children}</main>
+      <main
+        className={styles.main}
+        onClick={() => {
+          setShowMobileMenu(false);
+          setShowCatalogueSubmenu(false);
+        }}
+      >
+        {children}
+        <WarningMessage />
+      </main>
       <footer className={styles.footer}>
         <div className={styles.footerBorders}>
           <div className={`container ${styles.footerUpper}`}>
@@ -214,22 +230,22 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
             <div className={`${styles.footerElement} ${styles.footerMap}`}>
               <div>
                 <h4 className={styles.footerHeader}>Фигурки</h4>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/35-scale/1/">
                   Масштаб 1:35
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/16-scale/1/">
                   Масштаб 1:16
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/48-scale/1/">
                   Масштаб 1:48
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/modern/1/">
                   Современка
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/ww1/1/">
                   Первая мировая
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/sci-fi/1/">
                   Фантастика
                 </Link>
               </div>
@@ -241,19 +257,19 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
                 <Link className={styles.footerLink} href="/items/all/1/">
                   Все по номерам
                 </Link>
-                <Link className={styles.footerLink} href="/items/all-by-date/1/">
+                <Link className={styles.footerLink} href="/items/best-sellers/1/">
                   Бестселлеры
                 </Link>
-                <Link className={styles.footerLink} href="/items/all-by-date/1/">
+                <Link className={styles.footerLink} href="/items/eastern-front/1/">
                   Все фигурки ВОВ
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/red-army/1/">
                   Красная армия
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/germans/1/">
                   Немцы
                 </Link>
-                <Link className={styles.footerLink} href="/">
+                <Link className={styles.footerLink} href="/items/civilians/1/">
                   Гражданские
                 </Link>
               </div>
@@ -290,9 +306,10 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
             </a>{" "}
             компании в отношении обработки персональных данных.
           </p>
-          <p className={`${styles.footerPar} ${styles.footerAuthor}`}>
-            Сайт разработал <Link href="/">Александр Зеленков</Link>
-          </p>
+          <Link href="https://github.com/SashaZel/stalingrad-ecommerce">
+          <div className={`${styles.footerPar} ${styles.footerAuthor}`}>
+            <div>Магазин разработал Александр Зеленков</div><IconGitHub />
+          </div></Link>
         </div>
       </footer>
     </div>

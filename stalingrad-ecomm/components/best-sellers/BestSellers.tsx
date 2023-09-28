@@ -14,10 +14,9 @@ export interface IBestSellerData {
 
 interface IBestSellerProps {
   bestSellerData: IBestSellerData[];
-  maxSlide: number;
 }
 
-export default function BestSellers({ maxSlide, bestSellerData }: IBestSellerProps) {
+export default function BestSellers({ bestSellerData }: IBestSellerProps) {
   const slidesWindowRef = useRef(null);
 
   const moveLeft = () => {

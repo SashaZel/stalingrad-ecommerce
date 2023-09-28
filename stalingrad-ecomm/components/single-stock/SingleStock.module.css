@@ -12,6 +12,10 @@
   font-weight: bold;
 }
 
+.info {
+  margin-bottom: 8px;
+}
+
 .quantityRow {
   display: flex;
   width: fit-content;
@@ -74,4 +78,10 @@
   margin-top: 8px;
   height: 6px;
   background: linear-gradient(90deg, var(--green-first), var(--green-second)) ;
+}
+
+.redLine {
+  margin-top: 8px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--main-11), var(--main-07)) ;
 }

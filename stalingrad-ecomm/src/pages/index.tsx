@@ -1,19 +1,16 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
-import Layout from "../../components/layout";
+import Layout from "../../components/layout/layout";
 import BestSellers, { IBestSellerData } from "../../components/best-sellers/BestSellers";
 import { getStaticDataFromLocal } from "../../lib/local-items-data";
-import { BEST_SELLERS, MAX_BEST_SELLER_SLIDE } from "../../content/content";
+import { BEST_SELLERS } from "../../content/content";
 
 interface IHomeProps {
   bestSellerData: IBestSellerData[];
 }
 
 export async function getStaticProps() {
-  if (BEST_SELLERS.length !== MAX_BEST_SELLER_SLIDE) {
-    console.error("@ BestSellers @getStaticProps() wrong length of bestsellers");
-  }
   const bestSellerData: IBestSellerData[] = [];
   for (let i = 0; i < BEST_SELLERS.length; i++) {
     const itemData = await getStaticDataFromLocal(BEST_SELLERS[i]);
@@ -215,20 +212,7 @@ export default function Home({ bestSellerData }: IHomeProps) {
           </div>
         </div>
       </section>
-      <BestSellers bestSellerData={bestSellerData} maxSlide={MAX_BEST_SELLER_SLIDE} />
-      <section className="container">
-        <h1 className={styles.warningMainHeader}>Внимание!</h1>
-        <h2>
-          В данный момент сайт находится в тестовом режиме и заказ фигурок не доступен. По всем вопросам пишите на
-        </h2>
-        <p>{" "}</p>
-        <p>{" "}</p>
-        <p>{" "}</p>
-        <p>{" "}</p>
-        <p>
-          <a href="mailto:stalingrad.figures@gmail.com">stalingrad.figures@gmail.com</a>
-        </p>
-      </section>
+      <BestSellers bestSellerData={bestSellerData} />
     </Layout>
   );
 }

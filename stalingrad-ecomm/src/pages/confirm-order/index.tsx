@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { cartAtom, userAddressAtom, userEmailAtom, userNameAtom } from "../../../lib/store";
-import Layout from "../../../components/layout";
+import Layout from "../../../components/layout/layout";
 import Link from "next/link";
 import Head from "next/head";
 import { useBatchStock } from "../../../api/useBatchStock";

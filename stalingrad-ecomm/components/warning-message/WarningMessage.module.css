@@ -1,0 +1,16 @@
+.container {
+  margin-top: 72px;
+  padding: 24px;
+  max-width: 560px;
+  border: 1px solid var(--border-gray-first);
+}
+
+.warningMainHeader {
+  margin-bottom: 16px;
+  color: var(--main-06);
+}
+
+.link {
+  display: block;
+  margin-top: 16px;
+}

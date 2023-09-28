@@ -184,12 +184,6 @@
   color: var(--text-black);
 }
 
-.warningMainHeader {
-  margin-top: 72px;
-  margin-bottom: 16px;
-  color: var(--main-06);
-}
-
 /* ========== media ================================ */
 
 @media screen and (min-width: 640px) {

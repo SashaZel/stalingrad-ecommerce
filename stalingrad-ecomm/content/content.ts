@@ -1,17 +1,21 @@
 import { ICatPaginated } from "../lib/local-items-data";
 
-export const MAX_BEST_SELLER_SLIDE = 9;
-
 export const BEST_SELLERS = [
+  "Stalingrad-3235",
+  "Stalingrad-3260",
+  "Stalingrad-3261",
+  "Stalingrad-3262",
+  "Stalingrad-3263",
+  "Stalingrad-3264",
+  "Stalingrad-3265",
+  "Stalingrad-3220",
   "Stalingrad-3221",
   "Stalingrad-3222",
-  "Stalingrad-3223",
-  "Stalingrad-3224",
-  "Stalingrad-3225",
-  "Stalingrad-3226",
-  "Stalingrad-3227",
-  "Stalingrad-3220",
+  "Stalingrad-3229",
   "Stalingrad-3200",
+  "Stalingrad-3546",
+  "Stalingrad-3101",
+  "Stalingrad-3177",
 ];
 
 export interface ICategory {
@@ -92,5 +96,23 @@ export const TAGS_GROUPS: ITagsGroups = {
     isSortedByDate: true,
     route: "big-sets",
     headerRUS: "Большие наборы"
+  },
+  bestSellers: {
+    tags: ["best_seller"],
+    isSortedByDate: true,
+    route: "best-sellers",
+    headerRUS: "Бестселлеры"
+  },
+  easternFront: {
+    tags: ["Eastern_front"],
+    isSortedByDate: false,
+    route: "eastern-front",
+    headerRUS: "Великая Отечественная война"
+  },
+  sciFi: {
+    tags: ["sci-fi"],
+    isSortedByDate: true,
+    route: "sci-fi",
+    headerRUS: "Фантастика"
   }
 };

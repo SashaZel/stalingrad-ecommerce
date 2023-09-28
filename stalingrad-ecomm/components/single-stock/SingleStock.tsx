@@ -19,10 +19,9 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
   const [cart, setCart] = useAtom(cartAtom);
-  const stock = Number(data?.stock);
+  const stock = Number(data?.stock) || 0;
   // const stock = 0;
 
-  // console.log('render SingleStock')
   if (isLoading) {
     return <div>...Loading</div>;
   }
@@ -60,15 +59,12 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
 
   const handleAddItemToCard = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // console.log("handle", e.currentTarget[0]);
-    // const quantityInputValue = quantity;
     if (!quantity) {
       return;
     }
     const currentItemInCart = cart.cartItems[itemID];
     console.log("currentItemInCart", currentItemInCart);
     if (currentItemInCart) {
-      // const updateQuantity = cart.cartItems[itemID].quantity + quantityInputValue;
       currentItemInCart.quantity += quantity;
       setCart((cart) => {
         return {
@@ -103,6 +99,7 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
 
   const errorMessage = error ? <span>{`Error: ${error}`}</span> : null;
 
+  const stockQuantity = stock > 5 ? "В наличии" : `В наличии ${stock} шт.`;
   const stockMsg =
     stock === 0 ? (
       <>
@@ -112,7 +109,7 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
         </p>
       </>
     ) : (
-      <p className={styles.stock}>{`В наличии ${stock} штук`}</p>
+      <p className={styles.stock}>{stockQuantity}</p>
     );
 
   return (
@@ -123,7 +120,7 @@ export function SingleStock({ itemID, currentEnv, catName, priceRUB }: ISingleSt
         {stockMsg}
       </div>
       {errorMessage}
-      <div className={styles.info}>In your cart {quantityInCard} these sets </div>
+      <div className={styles.info}>В корзине {quantityInCard} шт. </div>
       <div className={styles.quantityRow}>
         <div className={styles.quantityButtons}>
           <button disabled={stock === 0} className={styles.decIncButtons} onClick={() => decrementQuantity()}>

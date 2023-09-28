@@ -4,7 +4,7 @@ import Layout from "../../../../../components/layout/layout";
 import { ItemsPage } from "../../../../../components/items-page/ItemsPage";
 import { getStaticPathsHelper, getStaticPropsHelper } from "../../../../../lib/items-page-helpers";
 
-const PAGE_KEY = "modern";
+const PAGE_KEY = "bestSellers";
 
 export async function getStaticPaths() {
   return getStaticPathsHelper(PAGE_KEY);

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { IItemsPageProps } from "../../../../../lib/types";
-import Layout from "../../../../../components/layout";
+import Layout from "../../../../../components/layout/layout";
 import { ItemsPage } from "../../../../../components/items-page/ItemsPage";
 import { getStaticPathsHelper, getStaticPropsHelper } from "../../../../../lib/items-page-helpers";
 

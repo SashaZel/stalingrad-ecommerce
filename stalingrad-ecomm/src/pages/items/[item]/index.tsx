@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { IStaticPathData, getStaticDataFromLocal, getStaticPathsFromLocalData } from "../../../../lib/local-items-data";
 import { IItemLocalJSON } from "../../../../lib/types";
-import Layout from "../../../../components/layout";
+import Layout from "../../../../components/layout/layout";
 import Head from "next/head";
 import Link from "next/link";
 import { cartAtom, countAtom } from "../../../../lib/store";
@@ -60,8 +60,11 @@ export default function Item({ itemData, currentEnv }: { itemData: IItemLocalJSO
         <div className={styles.content}>
           <Gallery itemData={itemData} />
           <div className={styles.contentRight}>
-            
-            <h1 className={styles.contentHeader}><span className={styles.contentID}>{itemData.id}</span><br />{catName}</h1>
+            <h1 className={styles.contentHeader}>
+              <span className={styles.contentID}>{itemData.id}</span>
+              <br />
+              {catName}
+            </h1>
             <SingleStock
               itemID={itemData.id}
               catName={itemData.catName}
