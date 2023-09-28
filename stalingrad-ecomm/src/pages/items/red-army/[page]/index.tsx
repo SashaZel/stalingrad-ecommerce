@@ -1,11 +1,10 @@
 import Head from "next/head";
-import { TAGS_GROUPS } from "../../../../../lib/local-items-data";
 import { IItemsPageProps } from "../../../../../lib/types";
 import Layout from "../../../../../components/layout";
 import { ItemsPage } from "../../../../../components/items-page/ItemsPage";
 import { getStaticPathsHelper, getStaticPropsHelper } from "../../../../../lib/items-page-helpers";
 
-const PAGE_KEY: keyof typeof TAGS_GROUPS = "redArmy";
+const PAGE_KEY = "redArmy";
 
 export async function getStaticPaths() {
   return getStaticPathsHelper(PAGE_KEY);

@@ -4,7 +4,7 @@ import Layout from "../../../../../components/layout";
 import { ItemsPage } from "../../../../../components/items-page/ItemsPage";
 import { getStaticPathsHelper, getStaticPropsHelper } from "../../../../../lib/items-page-helpers";
 
-const PAGE_KEY = "all";
+const PAGE_KEY = "civilians";
 
 export async function getStaticPaths() {
   return getStaticPathsHelper(PAGE_KEY);
