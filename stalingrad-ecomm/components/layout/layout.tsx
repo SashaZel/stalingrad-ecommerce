@@ -99,7 +99,7 @@ export default function Layout({ children }: { children: JSX.Element[] }) {
                           </Link>
                         </li>
                         <li className={`${styles.menuElement} ${styles.submenuElement}`}>
-                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/modern/1/">
+                          <Link className={`${styles.menuLink} ${styles.submenuLink}`} href="/items/ww1/1/">
                             Первая мировая
                           </Link>
                         </li>
