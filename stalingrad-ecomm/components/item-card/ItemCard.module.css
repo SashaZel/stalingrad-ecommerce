@@ -1,9 +1,9 @@
 .container {
   padding: 16px 4px 16px 4px;
+  min-height: 150px;
   background: linear-gradient(45deg, var(--bg-second), var(--border-gray-second));
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
 }
 
 .wideContainer {
